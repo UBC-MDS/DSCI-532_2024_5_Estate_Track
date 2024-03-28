@@ -1,4 +1,4 @@
-# Contributing to Estates-Track
+# Contributing to HomeScope
 
 Contributions are welcome, and they are greatly appreciated! Every little bit
 helps, and credit will always be given.This outlines how to propose a change to the Estates-Track project.
