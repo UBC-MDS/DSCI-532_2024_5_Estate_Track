@@ -73,7 +73,7 @@ Before you submit a pull request, check that it meets these guidelines:
 
 ## Code of Conduct
 
-Please note that the `DSCI-532_2024_5_estates-track` project is released with a
+Please note that the `DSCI-532_2024_5_HomeScope` project is released with a
 Code of Conduct. By contributing to this project you agree to abide by its terms.
 
 ## Attribution
