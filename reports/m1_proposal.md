@@ -21,19 +21,26 @@ Geospatial Distribution: Is there a spatial pattern to the real estate prices wh
 
 Investment Opportunity Identification: In which cities do the real estate prices appear to be undervalued relative to the median family income and population, potentially indicating good investment opportunities?
 
-# Persona Description
+### Persona Description
 Name: Jacob Tremblay
 Role: Real Estate Analyst at a Canadian Urban Development Firm
 Background: Jacob has extensive experience in urban planning and real estate market analysis. His firm is tasked with advising local governments on development policies that align with market trends and housing affordability initiatives.
 Goal: To gather insights on the real estate market across Canada's most populous cities to inform development policies and investment strategies.
 
-# User Story and Usage Scenario
+### User Story and Usage Scenario
 Jacob logs onto the "HomeScope" dashboard with the goal of [identifying] market trends and [assessing] the impact of demographic factors on housing prices. He aims to [compare] various housing markets and [extract] actionable data to support urban development plans.
 
-# As he navigates the dashboard:
+### As he navigates the dashboard:
 Exploring the Map: Jacob starts by exploring the interactive map, hovering over cities to see a tooltip with the average house price and clicking on cities for more in-depth statistics. This immediate visual assessment helps him [identify] regions with the highest market activity.
 Filtering Data: Utilizing the filter panel, he [narrows] down his search to cities with a median family income below a specific threshold, aiming to understand affordability issues. He adjusts sliders for the number of bedrooms and bathrooms to reflect typical family homes.
 Viewing Listings: He scrolls through the listings that match his filters, [noting] properties that are outliers in terms of price, which could indicate a potential for market correction.
 Taking Action: Based on the dashboard's data, Jacob [concludes] that certain cities show a concerning disparity between income and housing prices. He decides to [recommend] targeted policy interventions in these areas, such as development incentives for affordable housing.
 By using the "HomeScope" dashboard, Jacob is able to [synthesize] comprehensive data into a clear narrative for his firm's consulting services. This leads to data-driven recommendations that can shape future urban development and real estate investment, ensuring that policies are responsive to actual market conditions.
 
+## Section 4: App sketch and description
+
+The "HomeScope" dashboard is an analytical tool for the real estate market.It features multiple user interface elements such as dropdown menus for selecting Province and City (with a facility to select multiple cities), and sliders for adjusting Price Range. There are also dropdowns for filtering by Number Of Baths and Beds. Data Visualization includes a map labeled "Latitude and Longitude by City" possibly representing property locations in cities. Horizontal bar chart for Average Price by City which shows the average property prices in different cities.A scatter chart titled "City, Price and Number_Beds" correlating prices with the number of bedrooms, and a bar chart comparing Median Income by Province and City. for all the plots the presence of tooltips gives users additional information on the charts.
+
+![sketch](../img/HomeScope.png)
+
+Overall, the dashboard seems to be designed to give real estate professionals or potential buyers a comprehensive overview of the housing market, with interactive elements that allow for a customized data exploration experience. 
