@@ -21,13 +21,13 @@ Geospatial Distribution: Is there a spatial pattern to the real estate prices wh
 
 Investment Opportunity Identification: In which cities do the real estate prices appear to be undervalued relative to the median family income and population, potentially indicating good investment opportunities?
 
-### Persona Description
+### Persona description
 Name: Jacob Tremblay
 Role: Real Estate Analyst at a Canadian Urban Development Firm
 Background: Jacob has extensive experience in urban planning and real estate market analysis. His firm is tasked with advising local governments on development policies that align with market trends and housing affordability initiatives.
 Goal: To gather insights on the real estate market across Canada's most populous cities to inform development policies and investment strategies.
 
-### User Story and Usage Scenario
+### User story and usage scenario
 Jacob logs onto the "HomeScope" dashboard with the goal of [identifying] market trends and [assessing] the impact of demographic factors on housing prices. He aims to [compare] various housing markets and [extract] actionable data to support urban development plans.
 
 ### As he navigates the dashboard:
@@ -39,8 +39,8 @@ By using the "HomeScope" dashboard, Jacob is able to [synthesize] comprehensive 
 
 ## Section 4: App sketch and description
 
-The "HomeScope" dashboard is an analytical tool for the real estate market.It features multiple user interface elements such as dropdown menus for selecting Province and City (with a facility to select multiple cities), and sliders for adjusting Price Range. There are also dropdowns for filtering by Number Of Baths and Beds. Data Visualization includes a map labeled "Latitude and Longitude by City" possibly representing property locations in cities. Horizontal bar chart for Average Price by City which shows the average property prices in different cities.A scatter chart titled "City, Price and Number_Beds" correlating prices with the number of bedrooms, and a bar chart comparing Median Income by Province and City. for all the plots the presence of tooltips gives users additional information on the charts.
+The "HomeScope" dashboard is an analytical tool for the real estate market. It features multiple user interface elements such as dropdown menus for selecting Province and City (with a facility to select multiple cities), and sliders for adjusting Price Range. There are also dropdowns for filtering by Number Of Baths and Beds. Data Visualization includes a map labelled "Latitude and Longitude by City" possibly representing property locations in cities. Horizontal bar chart for Average Price by City shows the average property prices in different cities. A scatter chart titled "City, Price and Number_Beds" correlating prices with the number of bedrooms, and a bar chart comparing Median Income by Province and City. For all the plots the presence of tooltips gives users additional information on the charts.
 
 ![sketch](../img/HomeScope.png)
 
-Overall, the dashboard seems to be designed to give real estate professionals or potential buyers a comprehensive overview of the housing market, with interactive elements that allow for a customized data exploration experience. 
+Overall, the dashboard is designed to give real estate professionals or potential buyers a comprehensive overview of the housing market, with interactive elements that allow for a customized data exploration experience. 
