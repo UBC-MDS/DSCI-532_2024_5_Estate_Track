@@ -31,16 +31,16 @@ app.layout = html.Div([
             html.Label("Price Range"),
             dcc.RangeSlider(
                 id='price-range-slider',
-                min=int(df['Price'].quantile(0.05)),
-                max=int(df['Price'].quantile(0.95)),
-                step=500000,
-                value=[int(df['Price'].quantile(0.05)), int(df['Price'].quantile(0.95))],
+                min=int(df['Price'].min()),
+                max=int(df['Price'].max()),
+                step=10000000,
+                value=[int(df['Price'].min()), int(df['Price'].max())],
             ),
             html.Label("Number of Beds"),
             dcc.Slider(
                 id='beds-slider',
                 min=1,
-                max=10,
+                max=20,
                 step=1,
                 value=1,
             ),
@@ -48,7 +48,7 @@ app.layout = html.Div([
             dcc.Slider(
                 id='baths-slider',
                 min=1,
-                max=10,
+                max=20,
                 step=1,
                 value=1,
             )
