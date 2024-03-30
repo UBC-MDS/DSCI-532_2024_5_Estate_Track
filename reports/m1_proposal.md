@@ -1,3 +1,26 @@
+# DSCI-532_2024_5_HomeScope
+## Motivation and Purpose:
+$Our role$: We are the data analytics team within a real estate development company.
+$Target audience$: Our dashboard is designed for real estate investors, developers, market analysts, and urban planners.
+
+### Motivation
+In today's dynamic real estate landscape, various factors significantly impact property values and market dynamics. Investors and developers seek insights to navigate these complexities effectively. Understanding regional trends, demographic shifts, and economic indicators is crucial for making strategic investment decisions.
+
+### Purpose:
+Our dashboard serves as a powerful tool for real estate stakeholders, offering in-depth analysis of key variables driving property prices. By exploring factors such as city-specific trends, property characteristics (number of beds and baths), population dynamics, and median family income, we provide nuanced insights that transcend surface-level observations.
+
+By harnessing the power of data visualization and analytics, our dashboard enables users to:
+
+- Identify lucrative investment opportunities: By analyzing city-specific trends and demographic patterns, investors can pinpoint emerging markets with high growth potential and strategic value.
+
+- Mitigate risk and optimize returns: Understanding the relationship between property characteristics and market demand allows developers to tailor their projects to meet the needs of target demographics, reducing vacancy rates and maximizing ROI.
+
+- Inform urban planning decisions: Urban planners can leverage insights from our dashboard to identify areas experiencing population growth and changing socio-economic dynamics, guiding infrastructure development and zoning policies.
+
+- Enhance market intelligence: Analysts and industry professionals can stay ahead of market trends by continuously monitoring key variables and adapting strategies to capitalize on evolving market conditions.
+
+In essence, our dashboard empowers real estate stakeholders with actionable insights derived from comprehensive data analysis. We aim to bridge the gap between complex market dynamics and practical decision-making to drive sustainable growth and prosperity within the real estate industry.
+
 ## Section 2: Description of the data
 
 We will present a visual analysis of a dataset encompassing 35,768 real estate prices from 2023, focusing on the 45 most popular Canadian cities as identified by the 2021 census. Each real estate relates to nine distinct features, playing a critical role in determining its market value. Features are categorized based on functions as following:
