@@ -1,13 +1,13 @@
 # DSCI-532_2024_5_HomeScope
 ## Motivation and Purpose:
-$Our role$: Data analytics team within a real estate development company.
-$Target audience$: Real estate investors, developers, market analysts, and urban planners.
+$Our role$: We are the data analytics team within a real estate development company.
+$Target audience$: Our dashboard is designed for real estate investors, developers, market analysts, and urban planners.
 
 ### Motivation
-In today's dynamic real estate landscape, the intricate interplay of various factors significantly impacts property values and market dynamics. Investors and developers are constantly seeking insights to navigate these complexities effectively. Understanding regional trends, demographic shifts, and economic indicators is essential for making strategic investment decisions.
+In today's dynamic real estate landscape, various factors significantly impact property values and market dynamics. Investors and developers seek insights to navigate these complexities effectively. Understanding regional trends, demographic shifts, and economic indicators is crucial for making strategic investment decisions.
 
 ### Purpose:
-Our dashboard serves as a powerful tool for real estate stakeholders by offering in-depth analysis of key variables driving property prices. Through detailed exploration of factors such as city-specific trends, property characteristics (number of beds and baths), population dynamics, and median family income, we provide nuanced insights that transcend surface-level observations.
+Our dashboard serves as a powerful tool for real estate stakeholders, offering in-depth analysis of key variables driving property prices. By exploring factors such as city-specific trends, property characteristics (number of beds and baths), population dynamics, and median family income, we provide nuanced insights that transcend surface-level observations.
 
 By harnessing the power of data visualization and analytics, our dashboard enables users to:
 
@@ -19,7 +19,7 @@ By harnessing the power of data visualization and analytics, our dashboard enabl
 
 - Enhance market intelligence: Analysts and industry professionals can stay ahead of market trends by continuously monitoring key variables and adapting strategies to capitalize on evolving market conditions.
 
-In essence, our dashboard empowers real estate stakeholders with actionable insights derived from comprehensive data analysis. By bridging the gap between complex market dynamics and practical decision-making, we aim to drive sustainable growth and prosperity within the real estate industry.
+In essence, our dashboard empowers real estate stakeholders with actionable insights derived from comprehensive data analysis. We aim to bridge the gap between complex market dynamics and practical decision-making to drive sustainable growth and prosperity within the real estate industry.
 
 ## Section 2: Description of the data
 
