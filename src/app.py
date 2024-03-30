@@ -33,7 +33,7 @@ app.layout = html.Div([
                 id='price-range-slider',
                 min=int(df['Price'].quantile(0.05)),
                 max=int(df['Price'].quantile(0.95)),
-                step=10000,
+                step=500000,
                 value=[int(df['Price'].quantile(0.05)), int(df['Price'].quantile(0.95))],
             ),
             html.Label("Number of Beds"),
