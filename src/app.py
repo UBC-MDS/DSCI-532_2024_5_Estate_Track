@@ -10,9 +10,10 @@ app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 df = pd.read_csv('data/raw/HouseListings.csv', encoding='latin-1')
 
 # Define layout
-app.layout = html.Div([  # Changed from dbc.Container to html.Div to accommodate the title
-    html.H1('HomeScope'),  # Add title
-    html.P('Find your best home'),  # Add subtitle
+app.layout = html.Div([
+    html.Div([
+        html.H1('HomeScope', style={'color': '#2AAA8A', 'font-size': '3em', 'font-family': 'Arial', 'text-align': 'center'})
+    ]),
     dbc.Row([
         dbc.Col([
             html.Label("Province"),
