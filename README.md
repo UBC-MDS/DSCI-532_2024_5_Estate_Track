@@ -1,4 +1,6 @@
-# DSCI-532_2024_5_HomeScope
+## \# DSCI-532_2024_5_HomeScope
+
+<img src="img/Homescope_img.png" width="500"/>
 
 ## Project Summary
 
