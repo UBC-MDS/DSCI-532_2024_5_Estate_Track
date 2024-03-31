@@ -19,7 +19,7 @@ HomeScope is a data analysis project aimed at providing stakeholders in the real
 
 ## Dataset
 
-The dataset is distributed under the **Creative Commons 1.0 Universal License** ([CC BY 1.0](https://creativecommons.org/publicdomain/zero/1.0/)).
+The dataset we use, named "Canadian house prices for top cities," is sourced from Kaggle. You can find it[here](https://www.kaggle.com/datasets/jeremylarcher/canadian-house-prices-for-top-cities).
 
 ## License
 
