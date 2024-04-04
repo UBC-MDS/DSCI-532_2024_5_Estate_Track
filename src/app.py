@@ -14,8 +14,9 @@ title = [html.H1('HomeScope', style={'color': '#2AAA8A', 'font-size': '3em', 'fo
 province_dropdown = dcc.Dropdown(
     id='province-dropdown',
     options=[{'label': province, 'value': province} for province in sorted(df['Province'].unique())],
-    value=sorted(df['Province'].unique())[0]
+    value='British Columbia'  # Changed from sorted(df['Province'].unique())[0]
 )
+
 city_dropdown = dcc.Dropdown(
     id='city-dropdown',
     multi = True
@@ -82,9 +83,15 @@ app.layout = dbc.Container([
 def update_city_dropdown(selected_province):
     unique_cities = sorted(df[df['Province'] == selected_province]['City'].unique())
     city_options = [{'label': city, 'value': city} for city in unique_cities]
-    # For multi-select dropdowns, we return an empty list instead of None
-    city_value = []  # This will ensure no cities are pre-selected
+    
+    # Pre-select Vancouver if British Columbia is selected
+    if selected_province == 'British Columbia':
+        city_value = ['Vancouver']
+    else:
+        city_value = []  # No cities are pre-selected if not British Columbia
+
     return city_options, city_value
+
 
 # Callback to update output graph based on selected filters
 @app.callback(
