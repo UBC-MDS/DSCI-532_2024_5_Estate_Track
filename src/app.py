@@ -16,7 +16,10 @@ province_dropdown = dcc.Dropdown(
     options=[{'label': province, 'value': province} for province in sorted(df['Province'].unique())],
     value=sorted(df['Province'].unique())[0]
 )
-city_dropdown = dcc.Dropdown(id='city-dropdown')  # Options will be dynamically generated
+city_dropdown = dcc.Dropdown(
+    id='city-dropdown',
+    multi = True
+)  # Options will be dynamically generated
 price_range_slider = dcc.RangeSlider(
     id='price-range-slider',
     min=int(df['Price'].min()),
@@ -70,19 +73,17 @@ app.layout = dbc.Container([
     ])
 ], fluid=True)
 
-# Callbacks
+# Callback to update city-dropdown options and values based on selected province
 @app.callback(
     [Output('city-dropdown', 'options'),
      Output('city-dropdown', 'value')],
     [Input('province-dropdown', 'value')]
 )
 def update_city_dropdown(selected_province):
-    # Get unique cities for the selected province
     unique_cities = sorted(df[df['Province'] == selected_province]['City'].unique())
-    # Create a list of options for the dropdown
     city_options = [{'label': city, 'value': city} for city in unique_cities]
-    # Set the default value to the first city in the list or None if list is empty
-    city_value = unique_cities[0] if unique_cities else None
+    # For multi-select dropdowns, we return an empty list instead of None
+    city_value = []  # This will ensure no cities are pre-selected
     return city_options, city_value
 
 # Callback to update output graph based on selected filters
@@ -94,23 +95,35 @@ def update_city_dropdown(selected_province):
      Input('beds-slider', 'value'),
      Input('baths-slider', 'value')]
 )
-def update_output_graph(province, city, price_range, beds, baths):
+def update_output_graph(province, cities, price_range, beds, baths):
+    # Handle the case where cities might be a string (single selection) or None
+    if not cities:  # This checks both for None and for an empty list
+        return px.scatter(title="Please select at least one city.")
+    
+    if isinstance(cities, str):
+        cities = [cities]  # Wrap string in list if it's not a list already
+
     filtered_df = df[
-        (df['Province'] == province) & 
-        (df['City'] == city) & 
-        (df['Price'] >= price_range[0]) & 
-        (df['Price'] <= price_range[1]) & 
-        (df['Number_Beds'] >= beds) & 
+        (df['Province'] == province) &
+        (df['City'].isin(cities)) &
+        (df['Price'] >= price_range[0]) &
+        (df['Price'] <= price_range[1]) &
+        (df['Number_Beds'] >= beds) &
         (df['Number_Baths'] >= baths)
     ]
+
+    # If the filtered dataframe is empty, show an informative message
+    if filtered_df.empty:
+        return px.scatter(title="No listings match the selected criteria.")
+
     fig = px.scatter(
-        filtered_df, 
-        x='Price', 
-        y='Number_Beds', 
-        size='Number_Baths', 
-        color='City', 
-        hover_name='Address', 
-        log_x=True, 
+        filtered_df,
+        x='Price',
+        y='Number_Beds',
+        size='Number_Baths',
+        color='City',
+        hover_name='Address',
+        log_x=True,
         size_max=15
     )
     return fig
@@ -118,8 +131,3 @@ def update_output_graph(province, city, price_range, beds, baths):
 # Run the Dash application
 if __name__ == '__main__':
     app.run_server(debug=True, host='127.0.0.1')
-
-
-
-
-
