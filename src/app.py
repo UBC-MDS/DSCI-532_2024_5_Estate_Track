@@ -136,6 +136,22 @@ def update_output_graph(province, cities, price_range, beds, baths):
     )
     return fig
 
+def run_real_estate_dash_app(df, title='Real Estate Price Distribution'):
+    """
+    Initializes and runs a Dash app to display the count of real estate listings per price range, split by province.
+
+    Parameters:
+    - df: pandas.DataFrame, the data frame containing 'Province' and 'Price' columns.
+    - title: str, the title of the graph.
+    """
+    # Visualization
+    fig = px.histogram(df, x='Price', color='Province', barmode='group',
+                    histfunc='count', title=title)
+    fig.update_layout(xaxis_title='Real Estate Price (CAD)',
+                    yaxis_title='Count of Listings',
+                    bargap=0.2)
+    return (fig)
+    
 # Run the Dash application
 if __name__ == '__main__':
     app.run_server(debug=False, host='127.0.0.1')
