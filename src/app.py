@@ -5,6 +5,7 @@ import plotly.express as px
 
 # Initialize the Dash app with Bootstrap CSS
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 
 # Read the CSV file
 df = pd.read_csv('data/raw/HouseListings.csv', encoding='latin-1')
@@ -137,4 +138,4 @@ def update_output_graph(province, cities, price_range, beds, baths):
 
 # Run the Dash application
 if __name__ == '__main__':
-    app.run_server(debug=True, host='127.0.0.1')
+    app.run_server(debug=False, host='127.0.0.1')
