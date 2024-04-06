@@ -4,15 +4,17 @@ channels:
     - defaults
 dependencies:
     - ipykernel
-    - altair-all
-    - dash
-    - dash-bootstrap-components
-    - plotly
+    - altair  
+    - dash=2.16.*
+    - dash-bootstrap-components=1.5.*
+    - plotly=5.19.*
     - r-base
     - r-tidyverse
     - r-shiny
     - r-languageserver
     - r-plotly
     - pip
-pip:
-    - dash-vega-components
+    - pandas=2.2.*  
+    - pip:
+        - dash-daq==0.5.* 
+
