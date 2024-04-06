@@ -57,6 +57,12 @@ widget_layout = dbc.Row([
 # Define the layout with a cleaner structure
 app.layout = dbc.Container(fluid=True, children=[
     html.Div([title]),
+    dbc.Row([
+        dbc.Col(card_avg_price, md=4, style={"marginBottom": "10px"}),
+        dbc.Col(card_min_price, md=4, style={"marginBottom": "10px"}),
+        dbc.Col(card_max_price, md=4, style={"marginBottom": "10px"})
+    ]),
+
     widget_layout,
     dbc.Row([
         dbc.Col(dcc.Graph(id='output-graph-beds'), md=6),
