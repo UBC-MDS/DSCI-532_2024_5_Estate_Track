@@ -4,7 +4,6 @@ import pandas as pd
 import plotly.express as px
 import dash_daq as daq
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 
 # Initialize the Dash app with Bootstrap CSS
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
