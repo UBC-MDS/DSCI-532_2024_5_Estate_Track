@@ -16,7 +16,7 @@ Additionally, we have incorporated scroll bars to adjust the number of bedrooms 
 The scatter plot illustrates the relationship between the number of bedrooms, bathrooms, and housing prices.
 Our grouped bar chart highlights differences between cities, especially by allowing users to compare numerical features across multiple locations.
 The geospatial graph leverages longitude and latitude data to outline country boundaries, enabling users to easily compare real estate locations and make informed decisions visually.
-[...one more graph.....]
+The price distribution histogram visualizes the price distribution in each province as selected by the user. The added cards ensure that the app dynamically reflects the full range of price statistics for real estate listings within the chosen province, providing a comprehensive overview.
 
 ## Next Steps
 
