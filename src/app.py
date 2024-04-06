@@ -47,6 +47,28 @@ baths_slider = dcc.Slider(
     updatemode='drag'
 )
 output_graph = dcc.Graph(id='output-graph')
+output_histogram = dcc.Graph(id='output-histogram')
+
+
+# Card for displaying the average price dynamically
+card_avg_price = dbc.Card(id='card-avg-price', children=[
+    dbc.CardBody([
+        html.P("Select a province to see the average price", className="card-text")
+    ])
+], style={"marginTop": "20px"})
+# Additional card components for Min and Max Prices
+card_min_price = dbc.Card(id='card-min-price', children=[
+    dbc.CardBody([
+        html.P("Select a province to see the minimum price", className="card-text")
+    ])
+], style={"marginTop": "20px", "marginRight": "10px"})
+
+card_max_price = dbc.Card(id='card-max-price', children=[
+    dbc.CardBody([
+        html.P("Select a province to see the maximum price", className="card-text")
+    ])
+], style={"marginTop": "20px", "marginLeft": "10px"})
+
 
 # Assembling global widgets
 global_widgets = [
@@ -70,8 +92,16 @@ global_widgets = [
 app.layout = dbc.Container([
     dbc.Row(dbc.Col(title)),
     dbc.Row([
+        dbc.Col(card_avg_price, md=4, style={"marginBottom": "10px"}),
+        dbc.Col(card_min_price, md=4, style={"marginBottom": "10px"}),
+        dbc.Col(card_max_price, md=4, style={"marginBottom": "10px"})
+    ]),
+    dbc.Row([
+        dbc.Col(output_histogram, md=12),
+    ]),
+    dbc.Row([
         dbc.Col(global_widgets, md=4),
-        dbc.Col(output_graph, md=8),
+        dbc.Col(output_graph, md=8)
     ])
 ], fluid=True)
 
@@ -151,7 +181,37 @@ def run_real_estate_dash_app(df, title='Real Estate Price Distribution'):
                     yaxis_title='Count of Listings',
                     bargap=0.2)
     return (fig)
+
+@app.callback(
+    [Output('output-histogram', 'figure'),
+     Output('card-avg-price', 'children'),
+     Output('card-min-price', 'children'),
+     Output('card-max-price', 'children')],
+    [Input('province-dropdown', 'value')]
+)
+def update_histogram_and_price_cards(province):
+    filtered_df = df[df['Province'] == province]
     
+    # Histogram
+    histogram_fig = px.histogram(filtered_df, x='Price',
+                                 title=f'Price Distribution in {province}',
+                                 labels={'Price': 'Real Estate Price (CAD)'},
+                                 nbins=50)
+    histogram_fig.update_layout(yaxis_title='Count of Listings', bargap=0.2)
+    
+    # Statistics
+    avg_price = filtered_df['Price'].mean() if not filtered_df.empty else 0
+    min_price = filtered_df['Price'].min() if not filtered_df.empty else 0
+    max_price = filtered_df['Price'].max() if not filtered_df.empty else 0
+    
+    # Update card contents
+    avg_card_content = [dbc.CardHeader("Average Price"), dbc.CardBody(f"${avg_price:,.2f}")]
+    min_card_content = [dbc.CardHeader("Minimum Price"), dbc.CardBody(f"${min_price:,.2f}")]
+    max_card_content = [dbc.CardHeader("Maximum Price"), dbc.CardBody(f"${max_price:,.2f}")]
+    
+    return histogram_fig, avg_card_content, min_card_content, max_card_content
+
+
 # Run the Dash application
 if __name__ == '__main__':
     app.run_server(debug=False, host='127.0.0.1')
