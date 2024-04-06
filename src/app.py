@@ -93,8 +93,7 @@ app.layout = dbc.Container([
         dbc.Col(global_widgets, md=2),
         dbc.Col(bar_graph, md=5),
          dbc.Col(output_graph,md=5)
-        ]),
-    dbc.Row([
+        ])
 ], fluid=True)
 
 # Callback to update city-dropdown options and values based on selected province
