@@ -25,6 +25,24 @@ baths_numeric_input = daq.NumericInput(id='baths-numeric-input', label='Number o
 variable1_dropdown = dcc.Dropdown(id='variable1-dropdown', options=['Price', 'Population', 'Median_Family_Income'], value='Price')
 variable2_dropdown = dcc.Dropdown(id='variable2-dropdown', options=['Price', 'Population', 'Median_Family_Income'], value='Median_Family_Income')
 
+output_histogram = dcc.Graph(id='output-histogram')
+# Card for displaying the average, min and max price dynamically
+card_avg_price = dbc.Card(id='card-avg-price', children=[
+    dbc.CardBody([
+        html.P("Select a province to see the average price", className="card-text")
+    ])
+], style={"marginTop": "20px"})
+card_min_price = dbc.Card(id='card-min-price', children=[
+    dbc.CardBody([
+        html.P("Select a province to see the minimum price", className="card-text")
+    ])
+], style={"marginTop": "20px", "marginRight": "10px"})
+card_max_price = dbc.Card(id='card-max-price', children=[
+    dbc.CardBody([
+        html.P("Select a province to see the maximum price", className="card-text")
+    ])
+], style={"marginTop": "20px", "marginLeft": "10px"})
+
 # Assemble the widget layout
 widget_layout = dbc.Row([
     dbc.Col(province_dropdown, width=3),
