@@ -4,6 +4,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import dash_daq as daq
+
 
 # Initialize the Dash app with Bootstrap CSS
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -31,22 +33,25 @@ price_range_slider = dcc.RangeSlider(
     value=[int(df['Price'].min()), int(df['Price'].max())],
     updatemode='drag'
 )
-beds_slider = dcc.Slider(
-    id='beds-slider',
-    min=int(df['Number_Beds'].min()),
-    max=int(df['Number_Beds'].max()),
-    step=6,
-    value=int(df['Number_Beds'].min()),
-    updatemode='drag'
+
+beds_numeric_input = daq.NumericInput(
+    id='beds-numeric-input',
+    label='Number of Beds',
+    labelPosition='top',
+    min=0,  
+    max=109,  
+    value=3,  
 )
-baths_slider = dcc.Slider(
-    id='baths-slider',
-    min=int(df['Number_Baths'].min()),
-    max=int(df['Number_Baths'].max()),
-    step=6,
-    value=int(df['Number_Baths'].min()),
-    updatemode='drag'
+
+baths_numeric_input = daq.NumericInput(
+    id='baths-numeric-input',
+    label='Number of Baths',
+    labelPosition='top',
+    min=0,  
+    max=59,  
+    value=2
 )
+
 output_graph = dcc.Graph(id='output-graph')
 map_graph = dcc.Graph(id='map-graph')
 
@@ -74,10 +79,10 @@ global_widgets = [
     price_range_slider,
     html.Br(),
     dbc.Label("Number of Beds"),
-    beds_slider,
+    beds_numeric_input,
     html.Br(),
     dbc.Label("Number of Baths"),
-    baths_slider,
+    baths_numeric_input,
     html.Br(),
     dbc.Label("Attribute 1"),
     variable1_dropdown,
@@ -127,8 +132,8 @@ def update_city_dropdown(selected_province):
     [Input('province-dropdown', 'value'),
      Input('city-dropdown', 'value'),
      Input('price-range-slider', 'value'),
-     Input('beds-slider', 'value'),
-     Input('baths-slider', 'value')]
+     Input('beds-numeric-input', 'value'),  
+     Input('baths-numeric-input', 'value')]  
 )
 def update_output_graph(province, cities, price_range, beds, baths):
     # Handle the case where cities might be a string (single selection) or None
@@ -257,9 +262,6 @@ def update_map_graph(province, cities):
     map_fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     
     return map_fig
-
-
-
 
 # Run the Dash application
 if __name__ == '__main__':
