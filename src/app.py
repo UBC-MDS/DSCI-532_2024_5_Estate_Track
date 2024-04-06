@@ -47,6 +47,7 @@ baths_slider = dcc.Slider(
     updatemode='drag'
 )
 output_graph = dcc.Graph(id='output-graph')
+map_graph = dcc.Graph(id='map-graph')
 
 # Assembling global widgets
 global_widgets = [
@@ -72,6 +73,7 @@ app.layout = dbc.Container([
     dbc.Row([
         dbc.Col(global_widgets, md=4),
         dbc.Col(output_graph, md=8),
+        dbc.Col(map_graph,md=8)
     ])
 ], fluid=True)
 
@@ -86,8 +88,8 @@ def update_city_dropdown(selected_province):
     city_options = [{'label': city, 'value': city} for city in unique_cities]
     
     # Pre-select Vancouver if British Columbia is selected
-    if selected_province == 'British Columbia':
-        city_value = ['Vancouver']
+    if unique_cities:
+        city_value = unique_cities[0]
     else:
         city_value = []  # No cities are pre-selected if not British Columbia
 
@@ -97,6 +99,7 @@ def update_city_dropdown(selected_province):
 # Callback to update output graph based on selected filters
 @app.callback(
     Output('output-graph', 'figure'),
+    #  Output('map-graph', 'figure')],
     [Input('province-dropdown', 'value'),
      Input('city-dropdown', 'value'),
      Input('price-range-slider', 'value'),
@@ -134,7 +137,49 @@ def update_output_graph(province, cities, price_range, beds, baths):
         log_x=True,
         size_max=15
     )
+   
     return fig
+
+@app.callback(
+   
+     Output('map-graph', 'figure'),
+    [Input('province-dropdown', 'value'),
+     Input('city-dropdown', 'value')]
+)
+def update_map_graph(province, cities):
+    # Selecting the province and setting up latitude and longitudes
+
+    province_df = df[df['Province'] == province]
+
+    avg_lat = province_df['Latitude'].mean()
+    avg_lon = province_df['Longitude'].mean()
+
+    # Calculate the average price for each city within the selected province
+    city_avg_prices = province_df.groupby('City').agg({'Price': 'mean'}).reset_index()
+
+    # Merge the average prices with the city locations
+    city_avg_prices = city_avg_prices.merge(province_df[['City', 'Latitude', 'Longitude','Median_Family_Income']].drop_duplicates(),
+                                            on='City', 
+                                            how='left')
+    city_avg_prices.rename(columns={'Price': 'Avg_Price', "Median_Family_Income":"Median_Income"}, inplace=True)
+    # Geospatial map for housing data
+    map_fig = px.scatter_mapbox(city_avg_prices, 
+                                lat="Latitude", 
+                                lon="Longitude", 
+                                color = "City" ,
+                                hover_data={"City": True, 
+                                            "Latitude": False,
+                                            "Longitude":False,
+                                            "Avg_Price":':.2f',
+                                            "Median_Income":True}, 
+                                zoom=10,
+                                center={"lat": avg_lat, "lon": avg_lon})
+    map_fig.update_layout(mapbox_style="open-street-map")
+    map_fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    
+    return map_fig
+
+
 
 # Run the Dash application
 if __name__ == '__main__':
