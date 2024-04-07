@@ -19,7 +19,7 @@ Thank you for visiting the `HomeScope` project repository. This README file is a
 
 <img src="img/Homescope_img.png" width="500"/>
 
-## Who Are We? {#who-are-we}
+## Who Are We?
 
 Our `HomeScope` team, comprised of adept developers and data scientists, is driven by a shared passion for inclusivity and technology. Our expertise in data analysis underpins our commitment to this project.
 
@@ -47,7 +47,7 @@ Our `HomeScope` dashboard is an empowering tool that enables:
 -   Community-driven contributions to our database, fostering growth and inclusivity.
 -   The synthesis of valuable insights to facilitate well-informed real estate decisions.
 
-## What Are We Doing? {#what-are-we-doing}
+## What Are We Doing?
 
 ### The Dashboard
 
@@ -68,11 +68,11 @@ The current iteration of `HomeScope` boasts:
 
 We are poised to refine `HomeScope` further, enhancing its interactivity and user interface. Our ambitions include the integration of advanced predictive analytics and the expansion of our dataset to encompass global markets.
 
-## Get Support {#get-support}
+## Get Support
 
 Encountered an issue or have a question? Feel free to [open an issue](#get-support) in this repository, and our team will be happy to assist you.
 
-## Collaboration {#collaboration}
+## Collaboration
 
 Our project is a collaborative endeavor, with each team member playing a pivotal role:
 
@@ -81,12 +81,10 @@ Our project is a collaborative endeavor, with each team member playing a pivotal
 -   [Carrie Yan](https://github.com/carrieyanyi)
 -   [Nasim Ghazanfari Nasrabadi](https://github.com/nassimgha)
 
-## Join Our Journey {#join-our-journey}
-
+## Join Our Journey
 Dive into `HomeScope` and join us in forging a more transparent and inclusive real estate landscape.
 
-### Data Sources and Licensing {#data-sources-and-licensing}
-
+### Data Sources and Licensing
 #### Data Sources
 
 Our analysis is anchored in a robust dataset, `Canadian house prices for top cities`, obtained from `Kaggle`. You can find it [here](https://www.kaggle.com/datasets/jeremylarcher/canadian-house-prices-for-top-cities).
@@ -95,7 +93,7 @@ Our analysis is anchored in a robust dataset, `Canadian house prices for top cit
 
 The `HomeScope` codebase is MIT licensed, as found in the [LICENSE.md](LICENSE.md) in this repository.
 
-## Setup for Local Development {#setup-for-local-development}
+## Setup for Local Development
 
 To run `HomeScope` locally:
 
@@ -141,15 +139,14 @@ To run `HomeScope` locally:
 
 This will launch the application, typically at <http://127.0.0.1:8050/> in your web browser.
 
-## Contributing {#contributing}
-
+## Contributing
 Your contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. Please read our [Contribution Guidelines](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests to us.
 
-## Thank You {#thank-you}
+## Thank You
 
 Thank you so much (Danke schön! Merci beaucoup!) for visiting our project. We hope you'll join us on this exciting journey to empower stakeholders in the real estate sector with HomeScope.
 
-## Glossary {#glossary}
+## Glossary
 
 -   README file: A document introducing an open project to the public and potential contributors, typically including installation, usage, and contribution information.
 -   Repository (or Repo): A collection of documents related to your project, where you create and save new code or content, often hosted on platforms like GitHub or Bitbucket.
