@@ -51,7 +51,7 @@ Our `HomeScope` dashboard is an empowering tool that enables:
 
 ### The Dashboard
 
-<img src="img/Homescope_demo.gif" width="1000"/>
+<img src="img/demo.gif" width="1000"/>
 
 The current iteration of `HomeScope` boasts:
 
