@@ -20,7 +20,7 @@ title = html.H1('HomeScope', style={'color': '#2AAA8A', 'font-size': '3em', 'fon
 province_dropdown = dcc.Dropdown(id='province-dropdown', options=[{'label': province, 'value': province} for province in sorted(df['Province'].unique())], value='British Columbia')
 city_dropdown = dcc.Dropdown(id='city-dropdown', multi=True)
 price_range_slider = dcc.RangeSlider(id='price-range-slider', min=int(df['Price'].min()), max=int(df['Price'].max()), step=10000000, value=[int(df['Price'].min()), int(df['Price'].max())], updatemode='drag')
-beds_numeric_input = daq.NumericInput(id='beds-numeric-input', label='Number of Beds', labelPosition='top', min=0, max=109, value=3)
+beds_numeric_input = daq.NumericInput(id='beds-numeric-input', label='Number of Beds', labelPosition='top', min=0, max=109, value=3,style={'justify':'left'})
 baths_numeric_input = daq.NumericInput(id='baths-numeric-input', label='Number of Baths', labelPosition='top', min=0, max=59, value=2)
 variable1_dropdown = dcc.Dropdown(id='variable1-dropdown', options=['Price', 'Population', 'Median_Family_Income'], value='Price')
 variable2_dropdown = dcc.Dropdown(id='variable2-dropdown', options=['Price', 'Population', 'Median_Family_Income'], value='Median_Family_Income')
@@ -56,27 +56,62 @@ widget_layout = dbc.Row([
 
 # Define the layout with a cleaner structure
 app.layout = dbc.Container(fluid=True, children=[
-    html.Div([title]),
+    # Title centered and styled
+    dbc.Row(dbc.Col(html.H1("HomeScope", style={'color': '#2AAA8A', 'textAlign': 'center'}), md=12)),
+
+    # Two-column layout
     dbc.Row([
-        dbc.Col(card_avg_price, md=4, style={"marginBottom": "10px"}),
-        dbc.Col(card_min_price, md=4, style={"marginBottom": "10px"}),
-        dbc.Col(card_max_price, md=4, style={"marginBottom": "10px"})
-    ]),
-    dbc.Row([
-        dbc.Col(output_histogram, md=12),
-    ]),
-    widget_layout,
-    dbc.Row([
-        dbc.Col(dcc.Graph(id='output-graph-beds'), md=6),
-        dbc.Col(dcc.Graph(id='output-graph-baths'), md=6)
-    ]),
-    dbc.Row([
-        dbc.Col(dcc.Graph(id='bar-graph'), md=12)
-    ]),
-    dbc.Row([
-        dbc.Col(dcc.Graph(id='map-graph'), md=12)
-    ])
-])
+        # Left Column for filters and map with added spacing
+        dbc.Col([
+            # Province and City dropdowns with additional vertical space
+            dbc.Row([
+                dbc.Col(province_dropdown, md=12, className="mb-4"),  # Increase bottom margin for spacing
+                dbc.Col(city_dropdown, md=12, className="mb-4")  # Increase bottom margin for spacing
+            ]),
+            
+            # Price Range Slider with more vertical space
+            dbc.Row(dbc.Col(price_range_slider, md=12, className="mb-4")),
+
+            # Numeric Inputs for Beds and Baths in separate rows for more space
+            dbc.Row([
+                dbc.Col(beds_numeric_input, md=6, className="mb-4"),  # Adjusted to half-width columns within the same row
+                dbc.Col(baths_numeric_input, md=6, className="mb-4")   # Adjusted to half-width columns within the same row
+            ]),
+
+            # Variable Dropdowns in separate rows for more spacing
+            dbc.Row(dbc.Col(variable1_dropdown, md=12, className="mb-4")),
+            dbc.Row(dbc.Col(variable2_dropdown, md=12, className="mb-4")),
+
+            # Map Graph spans full width of the column with additional space
+            dbc.Row(dbc.Col(dcc.Graph(id='map-graph'), md=12, className="mb-4")),
+        ], md=4),  
+        
+        # Right Column for cards and graphs
+        dbc.Col([
+            # Row for Cards
+            dbc.Row([
+                dbc.Col(card_avg_price, md=4),
+                dbc.Col(card_min_price, md=4),
+                dbc.Col(card_max_price, md=4)
+            ], className="mb-3"),  # Add margin at the bottom of the row
+            
+            # Row for Scatter Plots
+            dbc.Row([
+                dbc.Col(dcc.Graph(id='output-graph-beds'), md=6),
+                dbc.Col(dcc.Graph(id='output-graph-baths'), md=6)
+            ], className="mb-5"),
+            
+            # Row for Bar Graph and Histogram
+            dbc.Row([
+                dbc.Col(dcc.Graph(id='bar-graph'), md=6),
+                dbc.Col(output_histogram, md=6)
+            ], className="mb-3"),
+        ], md=8),  # Adjust the width as per your design
+    ], className="mb-5"),  # Add margin at the bottom of the row
+], className="mt-5")  # Add margin at the top of the container
+
+
+
 
 # Callback to update city-dropdown options and values based on selected province
 @app.callback(
@@ -128,6 +163,7 @@ def update_beds_plot(province, cities, price_range, beds):
 
     fig = px.scatter(
         filtered_df,
+        title = 'Scatter plot of Price and Number of Beds',
         x='Price',
         y='Number_Beds',
         color='City',
@@ -168,6 +204,7 @@ def update_baths_plot(province, cities, price_range, baths):
 
     fig = px.scatter(
         filtered_df,
+        title = 'Scatter plot of Price and Number of Baths',
         x='Price',
         y='Number_Baths',
         color='City',
@@ -232,7 +269,7 @@ def update_bar_chart(province, cities, var1, var2):
 
     # Update the layout of the bar chart
     fig.update_layout(
-        title_text='Comparison of Variables',
+        title_text='Comparison of Price and Median Family Income',
         barmode='group',
         legend_title_text='Variable',
         xaxis_title='City',
