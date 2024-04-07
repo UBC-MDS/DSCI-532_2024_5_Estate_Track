@@ -17,7 +17,7 @@ Thank you for visiting the `HomeScope` project repository. This README file is a
 -   [Thank You](#thankyou)
 -   [Understand the jargon](#glossary)
 
-![HomeScope Dashboard](img/Homescope_img.png)
+<img src="img/Homescope_img.png" width="500"/>
 
 ## Who Are We? {#who-are-we}
 
@@ -60,7 +60,7 @@ The current iteration of `HomeScope` boasts:
 
 ### Dashboard Design (Milestone2)
 
-![HomeScope Milestone2 Design](img/milestone2.png)
+<img src="img/milestone2.png" width="1000"/>
 
 ### Forward Vision
 
