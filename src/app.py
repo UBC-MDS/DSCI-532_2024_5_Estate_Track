@@ -15,17 +15,61 @@ df = pd.read_csv('data/raw/HouseListings.csv', encoding='latin-1')
 # Dropdown options for variable1 and variable2
 variable_options = [{'label': col, 'value': col} for col in ['Price', 'Number_Beds', 'Number_Baths', 'Population', 'Median_Family_Income']]
 
-# Components
+# Components with added labels using dbc.Row and dbc.Col
 title = html.H1('HomeScope', style={'color': '#2AAA8A', 'font-size': '3em', 'font-family': 'Arial', 'text-align': 'center'})
-province_dropdown = dcc.Dropdown(id='province-dropdown', options=[{'label': province, 'value': province} for province in sorted(df['Province'].unique())], value='British Columbia')
-city_dropdown = dcc.Dropdown(id='city-dropdown', multi=True)
-price_range_slider = dcc.RangeSlider(id='price-range-slider', min=int(df['Price'].min()), max=int(df['Price'].max()), step=10000000, value=[int(df['Price'].min()), int(df['Price'].max())], updatemode='drag')
+
+province_dropdown = dbc.Row([
+    dbc.Col(html.Label("Province", className='form-label'), width=2),
+    dbc.Col(dcc.Dropdown(
+        id='province-dropdown',
+        options=[{'label': province, 'value': province} for province in sorted(df['Province'].unique())],
+        value='British Columbia'
+    ), width=10)
+], className="mb-3")
+
+city_dropdown = dbc.Row([
+    dbc.Col(html.Label("City", className='form-label'), width=2),
+    dbc.Col(dcc.Dropdown(
+        id='city-dropdown',
+        multi=True
+    ), width=10)
+], className="mb-3")
+
+price_range_slider = dbc.Row([
+    dbc.Col(html.Label("Price Range", className='form-label'), width=2),
+    dbc.Col(dcc.RangeSlider(
+        id='price-range-slider',
+        min=int(df['Price'].min()),
+        max=int(df['Price'].max()),
+        step=10000000,
+        value=[int(df['Price'].min()), int(df['Price'].max())],
+        updatemode='drag'
+    ), width=10)
+], className="mb-3")
+
 beds_numeric_input = daq.NumericInput(id='beds-numeric-input', label='Number of Beds', labelPosition='top', min=0, max=109, value=3,style={'justify':'left'})
 baths_numeric_input = daq.NumericInput(id='baths-numeric-input', label='Number of Baths', labelPosition='top', min=0, max=59, value=2)
-variable1_dropdown = dcc.Dropdown(id='variable1-dropdown', options=['Price', 'Population', 'Median_Family_Income'], value='Price')
-variable2_dropdown = dcc.Dropdown(id='variable2-dropdown', options=['Price', 'Population', 'Median_Family_Income'], value='Median_Family_Income')
+
+variable1_dropdown = dbc.Row([
+    dbc.Col(html.Label("Bar Plot First Variable", className='form-label'), width=2),
+    dbc.Col(dcc.Dropdown(
+        id='variable1-dropdown',
+        options=[{'label': 'Price', 'value': 'Price'}, {'label': 'Population', 'value': 'Population'}, {'label': 'Median Family Income', 'value': 'Median_Family_Income'}],
+        value='Price'
+    ), width=10)
+], className="mb-3")
+
+variable2_dropdown = dbc.Row([
+    dbc.Col(html.Label("Bar Plot Second Variable", className='form-label'), width=2),
+    dbc.Col(dcc.Dropdown(
+        id='variable2-dropdown',
+        options=[{'label': 'Price', 'value': 'Price'}, {'label': 'Population', 'value': 'Population'}, {'label': 'Median Family Income', 'value': 'Median_Family_Income'}],
+        value='Median_Family_Income'
+    ), width=10)
+], className="mb-3")
 
 output_histogram = dcc.Graph(id='output-histogram')
+
 # Card for displaying the average, min and max price dynamically
 card_avg_price = dbc.Card(id='card-avg-price', children=[
     dbc.CardBody([
