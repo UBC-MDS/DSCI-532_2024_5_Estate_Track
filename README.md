@@ -51,6 +51,8 @@ Our `HomeScope` dashboard is an empowering tool that enables:
 
 ### The Dashboard
 
+<img src="img/Homescope_demo.gif" width="1000"/>
+
 The current iteration of `HomeScope` boasts:
 
 -   Interactive filters for localized real estate data analysis.
