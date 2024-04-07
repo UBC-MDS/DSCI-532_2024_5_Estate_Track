@@ -64,6 +64,6 @@ By using the "HomeScope" dashboard, Jacob is able to [synthesize] comprehensive 
 
 The "HomeScope" dashboard is an analytical tool for the real estate market. It features multiple user interface elements such as dropdown menus for selecting Province and City (with a facility to select multiple cities), and sliders for adjusting Price Range. There are also dropdowns for filtering by Number Of Baths and Beds. Data Visualization includes a map labelled "Latitude and Longitude by City" possibly representing property locations in cities. Horizontal bar chart for Average Price by City shows the average property prices in different cities. A scatter chart titled "City, Price and Number_Beds" correlating prices with the number of bedrooms, and a bar chart comparing Median Income by Province and City. For all the plots the presence of tooltips gives users additional information on the charts.
 
-![sketch](../img/HomeScope.png)
+![sketch](../img/Sketch.png)
 
 Overall, the dashboard is designed to give real estate professionals or potential buyers a comprehensive overview of the housing market, with interactive elements that allow for a customized data exploration experience. 
