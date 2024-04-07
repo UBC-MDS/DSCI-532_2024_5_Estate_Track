@@ -163,7 +163,7 @@ def update_beds_plot(province, cities, price_range, beds):
 
     fig = px.scatter(
         filtered_df,
-        title = 'Scatter plot of Price and Number of Beds',
+        title = 'Price-Bedroom Correlation',
         x='Price',
         y='Number_Beds',
         color='City',
@@ -204,7 +204,7 @@ def update_baths_plot(province, cities, price_range, baths):
 
     fig = px.scatter(
         filtered_df,
-        title = 'Scatter plot of Price and Number of Baths',
+        title = 'Price-Bathroom Correlation',
         x='Price',
         y='Number_Baths',
         color='City',
