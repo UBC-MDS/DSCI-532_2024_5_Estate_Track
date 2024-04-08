@@ -344,7 +344,7 @@ def update_bar_chart(province, cities, var1, var2):
 
     return fig
 
-Update bar graph 2
+# Update bar graph 2
 @app.callback(
     Output('bar-graph-2', 'figure'),
     [Input('province-dropdown', 'value'),
