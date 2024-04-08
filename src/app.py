@@ -344,51 +344,51 @@ def update_bar_chart(province, cities, var1, var2):
 
     return fig
 
-# Update bar graph 2
-# @app.callback(
-#     Output('bar-graph-2', 'figure'),
-#     [Input('province-dropdown', 'value'),
-#      Input('city-dropdown', 'value'),
-#      Input('variable3-dropdown', 'value')]
-# )
-# def update_bar_chart(province, cities, var3):
-#     # If no city is selected, return an empty figure with a message
-#     if not cities:
-#         return {
-#             'layout': {
-#                 'title': 'Please select at least one city.'
-#             }
-#         }
+Update bar graph 2
+@app.callback(
+    Output('bar-graph-2', 'figure'),
+    [Input('province-dropdown', 'value'),
+     Input('city-dropdown', 'value'),
+     Input('variable3-dropdown', 'value')]
+)
+def update_bar_chart(province, cities, var3):
+    # If no city is selected, return an empty figure with a message
+    if not cities:
+        return {
+            'layout': {
+                'title': 'Please select at least one city.'
+            }
+        }
 
-#     # Ensure cities is always a list
-#     if isinstance(cities, str):
-#         cities = [cities]
+    # Ensure cities is always a list
+    if isinstance(cities, str):
+        cities = [cities]
 
-#     # Filter the DataFrame based on the province and cities selected
-#     df_filtered = df[(df['Province'] == province) & (df['City'].isin(cities))]
+    # Filter the DataFrame based on the province and cities selected
+    df_filtered = df[(df['Province'] == province) & (df['City'].isin(cities))]
 
-#     # Group the data by City and calculate the mean of the selected variables
-#     df_count = df_filtered.groupby('City')[[var3]].value_counts().reset_index()
-#     top_5_per_city = (df_count.sort_values(['City', 'count'], ascending=[True, False])
-#                                  .groupby('City')
-#                                  .head(5))
+    # Group the data by City and calculate the mean of the selected variables
+    df_count = df_filtered.groupby('City')[[var3]].value_counts().reset_index()
+    top_5_per_city = (df_count.sort_values(['City', 'count'], ascending=[True, False])
+                                 .groupby('City')
+                                 .head(5))
 
-#     color_seq = ['#98BDFF','#F3797E','#7DA0FA', '#7978E9', '#4B49AC']
+    color_seq = ['#98BDFF','#F3797E','#7DA0FA', '#7978E9', '#4B49AC']
 
-#     fig = px.bar(
-#         y=top_5_per_city[var3], 
-#         x=top_5_per_city['count'],
-#         orientation='h',
-#         color=top_5_per_city['City'],
-#         text=top_5_per_city[var3],
-#         color_discrete_sequence=color_seq)
+    fig = px.bar(
+        y=top_5_per_city[var3], 
+        x=top_5_per_city['count'],
+        orientation='h',
+        color=top_5_per_city['City'],
+        text=top_5_per_city[var3],
+        color_discrete_sequence=color_seq)
 
-#     # Update the layout of the bar chart
-#     fig.update_layout(title_text=f'Top 5 of Popular {var3} Type within Cities',
-#                       xaxis_title='Count',
-#                       yaxis_title=f'{var3}',
-#                       barmode='group')
-#     return fig
+    # Update the layout of the bar chart
+    fig.update_layout(title_text=f'Top 5 of Popular {var3} Type within Cities',
+                      xaxis_title='Count',
+                      yaxis_title=f'{var3}',
+                      barmode='group')
+    return fig
 
 # Update map graph
 @app.callback(
