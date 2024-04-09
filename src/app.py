@@ -380,7 +380,7 @@ def update_bar_chart(province, cities, var3):
         x=top_5_per_city['count'],
         orientation='h',
         color=top_5_per_city['City'],
-        text=top_5_per_city[var3],
+        text=top_5_per_city['count'],
         color_discrete_sequence=color_seq)
 
     # Update the layout of the bar chart
