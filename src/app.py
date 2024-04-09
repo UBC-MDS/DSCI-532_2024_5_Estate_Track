@@ -12,9 +12,12 @@ server = app.server
 
 # Read the CSV file
 df = pd.read_csv('data/raw/HouseListings.csv', encoding='latin-1')
+df.rename(columns={'Number_Beds': 'Bedrooms', 
+                    'Number_Baths': 'Bathrooms',
+                    'Median_Family_Income': 'Median Family Income'}, inplace=True)
 
 # Dropdown options for variable1 and variable2
-variable_options = [{'label': col, 'value': col} for col in ['Price', 'Number_Beds', 'Number_Baths', 'Population', 'Median_Family_Income']]
+variable_options = [{'label': col, 'value': col} for col in ['Price', 'Bathrooms', 'Bedrooms', 'Population', 'Median Family Income']]
 
 # Components with added labels using dbc.Row and dbc.Col
 title = html.H1('HomeScope', style={'color': '#2AAA8A', 'font-size': '3em', 'font-family': 'Arial', 'text-align': 'center'})
@@ -55,7 +58,7 @@ variable1_dropdown = dbc.Row([
     dbc.Col(html.Label("Bar Plot First Variable", className='form-label'), width=2),
     dbc.Col(dcc.Dropdown(
         id='variable1-dropdown',
-        options=[feature for feature in df[['Price','Number_Beds', 'Number_Baths','Population','Median_Family_Income' ]]],
+        options=[feature for feature in df[['Price','Bedrooms', 'Bathrooms','Population','Median Family Income' ]]],
         value='Price'
     ), width=10)
 ], className="mb-3")
@@ -64,8 +67,8 @@ variable2_dropdown = dbc.Row([
     dbc.Col(html.Label("Bar Plot Second Variable", className='form-label'), width=2),
     dbc.Col(dcc.Dropdown(
         id='variable2-dropdown',
-        options=[feature for feature in df[['Price','Number_Beds', 'Number_Baths','Population','Median_Family_Income' ]]],
-        value='Median_Family_Income'
+        options=[feature for feature in df[['Price','Bedrooms', 'Bathrooms','Population','Median Family Income'  ]]],
+        value='Median Family Income'
     ), width=10)
 ], className="mb-3")
 
@@ -73,8 +76,8 @@ variable3_dropdown = dbc.Row([
     dbc.Col(html.Label("Bar Plot Third Variable", className='form-label'), width=2),
     dbc.Col(dcc.Dropdown(
         id='variable3-dropdown',
-        options=[feature for feature in df[['Number_Beds', 'Number_Baths']]],
-        value='Number_Beds'
+        options=[feature for feature in df[['Bedrooms', 'Bathrooms']]],
+        value='Bedrooms'
     ), width=10)
 ], className="mb-3")
 
@@ -251,7 +254,7 @@ def update_baths_plot(province, cities, price_range, baths):
         (df['City'].isin(cities)) &
         (df['Price'] >= price_range[0]) &
         (df['Price'] <= price_range[1]) &
-        (df['Number_Baths'] >= baths)
+        (df['Bathrooms'] >= baths)
     ]
 
     # If the filtered dataframe is empty, show an informative message
@@ -262,7 +265,7 @@ def update_baths_plot(province, cities, price_range, baths):
         filtered_df,
         title = 'Price-Bathroom Correlation',
         x='Price',
-        y='Number_Baths',
+        y='Bathrooms',
         color='City',
         hover_name='Address',
         log_x=True
@@ -384,7 +387,7 @@ def update_bar_chart(province, cities, var3):
         color_discrete_sequence=color_seq)
 
     # Update the layout of the bar chart
-    fig.update_layout(title_text=f'Top 5 of Popular {var3} Type within Cities',
+    fig.update_layout(title_text=f'Top 5 {var3} Counts Across Cities',
                       xaxis_title='Count',
                       yaxis_title=f'{var3}',
                       barmode='group')
@@ -409,10 +412,10 @@ def update_map(province, cities):
     city_avg_prices = province_df.groupby('City').agg({'Price': 'mean'}).reset_index()
 
     # Merge the average prices with the city locations
-    city_avg_prices = city_avg_prices.merge(province_df[['City', 'Latitude', 'Longitude','Median_Family_Income']].drop_duplicates(),
+    city_avg_prices = city_avg_prices.merge(province_df[['City', 'Latitude', 'Longitude','Median Family Income']].drop_duplicates(),
                                             on='City', 
                                             how='left')
-    city_avg_prices.rename(columns={'Price': 'Avg_Price', "Median_Family_Income":"Median_Income"}, inplace=True)
+    city_avg_prices.rename(columns={'Price': 'Avg_Price', "Median Family Income":"Median_Income"}, inplace=True)
     # Geospatial map for housing data
     map_fig = px.scatter_mapbox(city_avg_prices, 
                                 lat="Latitude", 
