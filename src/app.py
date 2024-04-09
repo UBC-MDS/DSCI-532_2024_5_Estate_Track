@@ -16,9 +16,6 @@ df.rename(columns={'Number_Beds': 'Bedrooms',
                     'Number_Baths': 'Bathrooms',
                     'Median_Family_Income': 'Median Family Income'}, inplace=True)
 
-# Dropdown options for variable1 and variable2
-variable_options = [{'label': col, 'value': col} for col in ['Price', 'Bathrooms', 'Bedrooms', 'Population', 'Median Family Income']]
-
 # Components with added labels using dbc.Row and dbc.Col
 title = html.H1('HomeScope', style={'color': '#2AAA8A', 'font-size': '3em', 'font-family': 'Arial', 'text-align': 'center'})
 
@@ -38,21 +35,6 @@ city_dropdown = dbc.Row([
         multi=True
     ), width=10)
 ], className="mb-3")
-
-price_range_slider = dbc.Row([
-    dbc.Col(html.Label("Price Range", className='form-label'), width=2),
-    dbc.Col(dcc.RangeSlider(
-        id='price-range-slider',
-        min=int(df['Price'].min()),
-        max=int(df['Price'].max()),
-        step=10000000,
-        value=[int(df['Price'].min()), int(df['Price'].max())],
-        updatemode='drag'
-    ), width=10)
-], className="mb-3")
-
-beds_numeric_input = daq.NumericInput(id='beds-numeric-input', label='Number of Beds', labelPosition='top', min=0, max=109, value=3,style={'justify':'left'})
-baths_numeric_input = daq.NumericInput(id='baths-numeric-input', label='Number of Baths', labelPosition='top', min=0, max=59, value=2)
 
 variable1_dropdown = dbc.Row([
     dbc.Col(html.Label("Bar Plot First Variable", className='form-label'), width=2),
@@ -104,9 +86,6 @@ card_max_price = dbc.Card(id='card-max-price', children=[
 widget_layout = dbc.Row([
     dbc.Col(province_dropdown, width=3),
     dbc.Col(city_dropdown, width=3),
-    dbc.Col(price_range_slider, width=6),
-    dbc.Col(beds_numeric_input, width=2),
-    dbc.Col(baths_numeric_input, width=2),
     dbc.Col(variable1_dropdown, width=2),
     dbc.Col(variable2_dropdown, width=2),
 ], className="mb-4")
@@ -124,15 +103,6 @@ app.layout = dbc.Container(fluid=True, children=[
             dbc.Row([
                 dbc.Col(province_dropdown, md=12, className="mb-4"),  # Increase bottom margin for spacing
                 dbc.Col(city_dropdown, md=12, className="mb-4")  # Increase bottom margin for spacing
-            ]),
-            
-            # Price Range Slider with more vertical space
-            dbc.Row(dbc.Col(price_range_slider, md=12, className="mb-4")),
-
-            # Numeric Inputs for Beds and Baths in separate rows for more space
-            dbc.Row([
-                dbc.Col(beds_numeric_input, md=6, className="mb-4"),  # Adjusted to half-width columns within the same row
-                dbc.Col(baths_numeric_input, md=6, className="mb-4")   # Adjusted to half-width columns within the same row
             ]),
 
             # Variable Dropdowns in separate rows for more spacing
@@ -152,12 +122,6 @@ app.layout = dbc.Container(fluid=True, children=[
                 dbc.Col(card_min_price, md=4),
                 dbc.Col(card_max_price, md=4)
             ], className="mb-3"),  # Add margin at the bottom of the row
-            
-            # Row for Scatter Plots
-            dbc.Row([
-                dbc.Col(dcc.Graph(id='output-graph-beds'), md=6),
-                dbc.Col(dcc.Graph(id='output-graph-baths'), md=6)
-            ], className="mb-5"),
             
             # Row for Bar Graph and Histogram
             dbc.Row([
@@ -189,89 +153,6 @@ def update_city_dropdown(selected_province):
         city_value = []  # No cities are pre-selected if not British Columbia
 
     return city_options, city_value
-
-# Callbacks for updating plots
-# Update beds scatter plot
-@app.callback(
-     Output('output-graph-beds', 'figure'),
-    [Input('province-dropdown', 'value'),
-     Input('city-dropdown', 'value'),
-     Input('price-range-slider', 'value'),
-     Input('beds-numeric-input', 'value')]
-)
-
-def update_beds_plot(province, cities, price_range, beds):
-    # Handle the case where cities might be a string (single selection) or None
-    if not cities:  # This checks both for None and for an empty list
-        return px.scatter(title="Please select at least one city.")
-    
-    if isinstance(cities, str):
-        cities = [cities]  # Wrap string in list if it's not a list already
-
-    filtered_df = df[
-        (df['Province'] == province) &
-        (df['City'].isin(cities)) &
-        (df['Price'] >= price_range[0]) &
-        (df['Price'] <= price_range[1]) &
-        (df['Number_Beds'] >= beds) 
-    ]
-
-    # If the filtered dataframe is empty, show an informative message
-    if filtered_df.empty:
-        return px.scatter(title="No listings match the selected criteria.")
-
-    fig = px.scatter(
-        filtered_df,
-        title = 'Price-Bedroom Correlation',
-        x='Price',
-        y='Number_Beds',
-        color='City',
-        hover_name='Address',
-        log_x=True
-    )
-   
-    return fig
-
-# Update baths scatter plot
-@app.callback(
-     Output('output-graph-baths', 'figure'),
-    [Input('province-dropdown', 'value'),
-     Input('city-dropdown', 'value'),
-     Input('price-range-slider', 'value'),
-     Input('baths-numeric-input', 'value')]
-)
-
-def update_baths_plot(province, cities, price_range, baths):
-    # Handle the case where cities might be a string (single selection) or None
-    if not cities:  # This checks both for None and for an empty list
-        return px.scatter(title="Please select at least one city.")
-    
-    if isinstance(cities, str):
-        cities = [cities]  # Wrap string in list if it's not a list already
-
-    filtered_df = df[
-        (df['Province'] == province) &
-        (df['City'].isin(cities)) &
-        (df['Price'] >= price_range[0]) &
-        (df['Price'] <= price_range[1]) &
-        (df['Bathrooms'] >= baths)
-    ]
-
-    # If the filtered dataframe is empty, show an informative message
-    if filtered_df.empty:
-        return px.scatter(title="No listings match the selected criteria.")
-
-    fig = px.scatter(
-        filtered_df,
-        title = 'Price-Bathroom Correlation',
-        x='Price',
-        y='Bathrooms',
-        color='City',
-        hover_name='Address',
-        log_x=True
-    )
-   
-    return fig
 
 # Update bar graph
 @app.callback(
