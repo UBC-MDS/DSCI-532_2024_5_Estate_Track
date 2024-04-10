@@ -334,9 +334,12 @@ def update_map(province, cities):
     # Selecting the province and setting up latitude and longitudes
 
     province_df = df[df['Province'] == province]
+    first_city = province_df['City'].dropna().sort_values().iloc[0]
 
-    avg_lat = province_df['Latitude'].mean()
-    avg_lon = province_df['Longitude'].mean()
+    # Get the latitude and longitude of the first city
+    first_city_data = province_df[province_df['City'] == first_city]
+    avg_lat = first_city_data['Latitude'].iloc[0]
+    avg_lon = first_city_data['Longitude'].iloc[0]
 
     # Calculate the average price for each city within the selected province
     city_avg_prices = province_df.groupby('City').agg({'Price': 'mean'}).reset_index()
@@ -356,8 +359,9 @@ def update_map(province, cities):
                                             "Longitude":False,
                                             "Avg_Price":':.2f',
                                             "Median_Income":True}, 
-                                zoom=10,
-                                center={"lat": avg_lat, "lon": avg_lon})
+                                zoom=5,
+                                center={"lat": avg_lat, "lon": avg_lon},
+                                color_continuous_scale="RdYlGn_r")
     map_fig.update_layout(mapbox_style="open-street-map")
     map_fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     
