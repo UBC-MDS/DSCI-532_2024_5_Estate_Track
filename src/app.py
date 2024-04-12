@@ -5,7 +5,7 @@ import plotly.express as px
 import dash_daq as daq
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from components import province_dropdown, city_dropdown, variable1_dropdown, variable2_dropdown, variable3_dropdown, card_avg_price, card_min_price, card_max_price,output_histogram
+from .components import province_dropdown, city_dropdown, variable1_dropdown, variable2_dropdown, variable3_dropdown, card_avg_price, card_min_price, card_max_price,output_histogram
 import callbacks
 
 # Initialize the Dash app with Bootstrap CSS
