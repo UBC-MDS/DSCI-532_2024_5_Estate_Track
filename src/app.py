@@ -180,15 +180,16 @@ def update_bar_chart(province, cities, var1, var2):
 
     # Group the data by City and calculate the mean of the selected variables
     df_grouped = df_filtered.groupby('City')[[var1,var2]].mean()
+    df_grouped_samevar = df_filtered.groupby('City').agg({var1: 'mean'})
 
     fig = make_subplots(specs=[[{"secondary_y": True}]])
 
     if var1 == var2:
         # If the two variables are the same, plot only one set of bars
         fig.add_trace(go.Bar(
-            x=df_grouped.index,
-            y=df_grouped[var1],
-            text=df_grouped[var1],                # Add the income values as text
+            x=df_grouped_samevar.index,
+            y=df_grouped_samevar[var1],
+            text=df_grouped_samevar[var1],                # Add the income values as text
             textposition='auto',              # Position the text automatically
             texttemplate='%{text:.2s}',
             name=f'{var1}',
