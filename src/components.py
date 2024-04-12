@@ -5,7 +5,7 @@ import plotly.express as px
 import dash_daq as daq
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from data import df
+from .data import df
 
 
 

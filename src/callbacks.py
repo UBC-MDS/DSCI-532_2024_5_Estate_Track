@@ -5,7 +5,7 @@ import dash_daq as daq
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
-from data import df
+from .data import df
 
 # Callback to update city-dropdown options and values based on selected province
 @callback(
