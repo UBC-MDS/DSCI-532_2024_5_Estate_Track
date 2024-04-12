@@ -194,7 +194,6 @@ def update_bar_chart(province, cities, var1, var2):
             texttemplate='%{text:.2s}',
             name=f'{var1}',
             marker_color='#F3797E'))
-        
     else:
         # If the two variables are different, plot two sets of bars
         fig.add_trace(go.Bar(
