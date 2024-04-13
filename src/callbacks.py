@@ -4,6 +4,10 @@ import plotly.express as px
 import dash_daq as daq
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import altair as alt
+import dash_vega_components as dvc
+import altair as alt
+from vega_datasets import data
 
 from data import df
 
@@ -191,30 +195,59 @@ def update_map(province, cities):
     return map_fig
 
 @callback(
-    [Output('output-histogram', 'figure'),
-     Output('card-avg-price', 'children'),
-     Output('card-min-price', 'children'),
-     Output('card-max-price', 'children')],
-    [Input('province-dropdown', 'value')]
-)
-def update_histogram_and_price_cards(province):
-    filtered_df = df[df['Province'] == province]
-    
-    # Histogram
-    histogram_fig = px.histogram(filtered_df, x='Price',
-                                 title=f'Price Distribution in {province}',
-                                 labels={'Price': 'Real Estate Price (CAD)'},
-                                 nbins=50)
-    histogram_fig.update_layout(yaxis_title='Count of Listings', bargap=0.2)
-    
-    # Statistics
-    avg_price = filtered_df['Price'].mean() if not filtered_df.empty else 0
-    min_price = filtered_df['Price'].min() if not filtered_df.empty else 0
-    max_price = filtered_df['Price'].max() if not filtered_df.empty else 0
-    
+        [
+            Output("output-histogram", "spec"), # Note that we are using "spec" instead of "figure" for Vega components
+            Output("card-avg-price", "children"),
+            Output("card-min-price", "children"),
+            Output("card-max-price", "children"),
+        ],
+        [Input("province-dropdown", "value"), Input("city-dropdown", "value")],
+    )
+def update_histogram_and_price_cards(province, cities):
+    filtered_df = df[df["Province"] == province]
+
+    if isinstance(cities, str):
+        cities = [cities]  # Ensure cities is a list
+
+    filtered_df = filtered_df[filtered_df["City"].isin(cities)]
+    # Assuming you want to plot densities for two cities: 'City A' and 'City B'
+
+    hist = alt.Chart(filtered_df).mark_bar(opacity=0.3).encode(
+        alt.X('Price:Q', bin=alt.Bin(maxbins=100)),  # Adjust 'maxbins' as needed
+        alt.Y('count()', stack=None),
+        color='City:N'
+    )
+
+    # Define the density plot
+    density = alt.Chart(filtered_df).transform_density(
+        'Price',
+        as_=['Price', 'Density'],
+        groupby=['City']
+    ).mark_line().encode(
+        x=alt.X('Price:Q'),
+        y='Density:Q',
+        color='City'
+    )
+
+    # Overlay the histogram and the density plot
+    overlay = alt.layer(hist, density).resolve_scale(
+        y='independent'
+    )
+
+    # Convert the Altair chart to a Vega-Lite spec
+    vega_spec = overlay.to_dict()
+
+
+
+
+    # Calculate statistics for price cards
+    avg_price = filtered_df["Price"].mean() if not filtered_df.empty else "N/A"
+    min_price = filtered_df["Price"].min() if not filtered_df.empty else "N/A"
+    max_price = filtered_df["Price"].max() if not filtered_df.empty else "N/A"
+
     # Update card contents
-    avg_card_content = [dbc.CardHeader("Average Price"), dbc.CardBody(f"${avg_price:,.2f}")]
-    min_card_content = [dbc.CardHeader("Minimum Price"), dbc.CardBody(f"${min_price:,.2f}")]
-    max_card_content = [dbc.CardHeader("Maximum Price"), dbc.CardBody(f"${max_price:,.2f}")]
-    
-    return histogram_fig, avg_card_content, min_card_content, max_card_content
+    avg_card_content = dbc.CardBody(f"Average Price: ${avg_price:,.2f}")
+    min_card_content = dbc.CardBody(f"Minimum Price: ${min_price:,.2f}")
+    max_card_content = dbc.CardBody(f"Maximum Price: ${max_price:,.2f}")
+
+    return vega_spec, avg_card_content, min_card_content, max_card_content
