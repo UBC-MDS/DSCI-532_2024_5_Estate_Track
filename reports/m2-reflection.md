@@ -9,7 +9,7 @@ We ensure that cities are only displayed under their respective provinces to imp
 The scatter plot illustrates the relationship between the number of bedrooms, bathrooms, and housing prices, providing clear insights into how these attributes influence housing prices.
 The bar chart highlights differences between cities, especially by allowing users to compare numerical features across multiple locations.
 The geospatial graph leverages longitude and latitude data to outline country boundaries, enabling users to easily compare real estate locations and make informed decisions visually.
-The price distribution histogram visualizes the house price in each province as selected by the user.
+The price distribution density overlaid on a histogram visualizes the house prices in cities selected by the user and compares the price distribution based on the cities selected in different colours.
 The added cards ensure that the app dynamically reflects the full range of price statistics for real estate listings within the chosen province, providing a comprehensive overview.
 
 ## Next Steps
