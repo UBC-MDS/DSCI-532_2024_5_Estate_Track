@@ -94,12 +94,28 @@ card_max_price = dbc.Card(
 #bar plot of numeric column
 bar_plot_1 = dcc.Graph(id='bar-graph-1')
 
+#bar plot1 add two dropdown
+bar_plot_card_1 = dbc.Card([
+    dbc.CardBody([
+        variable1_dropdown,
+        variable2_dropdown,
+        bar_plot_1
+    ])
+])
+
 #histogram plot of price
 output_histogram = dvc.Vega(id='output-histogram', spec={})
-
 
 #map plot
 map_plot = dcc.Graph(id='map-graph')
 
 #bar plot of bedrooms and bathrooms
 bar_plot_2 = dcc.Graph(id='bar-graph-2')
+
+#bar plot2 add one dropdown
+bar_plot_card_2 = dbc.Card([
+    dbc.CardBody([
+        variable3_dropdown,
+        bar_plot_2
+    ])
+])

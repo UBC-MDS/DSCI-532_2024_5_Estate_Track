@@ -5,7 +5,7 @@ import plotly.express as px
 import dash_daq as daq
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from components import province_dropdown, city_dropdown, variable1_dropdown, variable2_dropdown, variable3_dropdown, card_avg_price, card_min_price, card_max_price,output_histogram, bar_plot_1, bar_plot_2, map_plot
+from components import province_dropdown, city_dropdown, variable3_dropdown, card_avg_price, card_min_price, card_max_price,output_histogram, bar_plot_card_1, bar_plot_card_2, map_plot
 import callbacks
 import altair as alt
 import dash_vega_components as dvc
@@ -26,11 +26,6 @@ app.layout = dbc.Container(fluid=True, children=[
 
             dbc.Col(province_dropdown, md=12, className="mb-4"),  # Increase bottom margin for spacing
             dbc.Col(city_dropdown, md=12, className="mb-4"),  # Increase bottom margin for spacing
-
-            # Variable Dropdowns in separate rows for more spacing
-            dbc.Row(dbc.Col(variable1_dropdown, md=12, className="mb-4")),
-            dbc.Row(dbc.Col(variable2_dropdown, md=12, className="mb-4")),
-            dbc.Row(dbc.Col(variable3_dropdown, md=12, className="mb-4")),
         ], md=3),  
         
         # Right Column for cards and graphs
@@ -44,13 +39,13 @@ app.layout = dbc.Container(fluid=True, children=[
             
             # Row for Bar Graph and Histogram
             dbc.Row([
-                dbc.Col(bar_plot_1, md=6),
+                dbc.Col(bar_plot_card_1, md=6),
                 dbc.Col(output_histogram, md=6)
             ], className="mb-3"),
 
             dbc.Row([
-                dbc.Col(map_plot, md=6, className="mb-4"),
-                dbc.Col(bar_plot_2, md=6)
+                dbc.Col(map_plot, md=6),
+                dbc.Col(bar_plot_card_2, md=6)
             ], className="mb-3"),
 
 
