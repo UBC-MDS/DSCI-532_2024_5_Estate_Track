@@ -12,51 +12,35 @@ import altair as alt
 from vega_datasets import data
 
 
-
 #Dropdowns for province, cities and variable 
-province_dropdown = dbc.Row([
-    dbc.Col(html.Label("Province", className='form-label'), width=2),
-    dbc.Col(dcc.Dropdown(
+province_dropdown = dcc.Dropdown(
         id='province-dropdown',
         options=[{'label': province, 'value': province} for province in sorted(df['Province'].unique())],
         value='British Columbia'
-    ), width=10)
-], className="mb-3")
+    )
 
-city_dropdown = dbc.Row([
-    dbc.Col(html.Label("City", className='form-label'), width=2),
-    dbc.Col(dcc.Dropdown(
+city_dropdown = dcc.Dropdown(
         id='city-dropdown',
         multi=True
-    ), width=10)
-], className="mb-3")
+    )
 
-variable1_dropdown = dbc.Row([
-    dbc.Col(html.Label("Bar Plot First Variable", className='form-label'), width=2),
-    dbc.Col(dcc.Dropdown(
+variable1_dropdown = dcc.Dropdown(
         id='variable1-dropdown',
         options=[feature for feature in df[['Price','Bedrooms', 'Bathrooms','Population','Median Family Income' ]]],
         value='Price'
-    ), width=10)
-], className="mb-3")
+    )
 
-variable2_dropdown = dbc.Row([
-    dbc.Col(html.Label("Bar Plot Second Variable", className='form-label'), width=2),
-    dbc.Col(dcc.Dropdown(
+variable2_dropdown = dcc.Dropdown(
         id='variable2-dropdown',
         options=[feature for feature in df[['Price','Bedrooms', 'Bathrooms','Population','Median Family Income'  ]]],
         value='Median Family Income'
-    ), width=10)
-], className="mb-3")
+    )
 
-variable3_dropdown = dbc.Row([
-    dbc.Col(html.Label("Bar Plot Third Variable", className='form-label'), width=2),
-    dbc.Col(dcc.Dropdown(
+variable3_dropdown = dcc.Dropdown(
         id='variable3-dropdown',
         options=[feature for feature in df[['Bedrooms', 'Bathrooms']]],
         value='Bedrooms'
-    ), width=10)
-], className="mb-3")
+    )
 
 # Card for displaying the minimum price dynamically
 card_min_price = dbc.Card(
@@ -98,10 +82,13 @@ bar_plot_1 = dcc.Graph(id='bar-graph-1')
 bar_plot_card_1 = dbc.Card([
     dbc.CardBody([
         variable1_dropdown,
+        html.Br(),
         variable2_dropdown,
         bar_plot_1
     ])
-])
+],
+style={"border": "none", "boxShadow": "none"} 
+)
 
 #histogram plot of price
 output_histogram = dvc.Vega(id='output-histogram', spec={})
@@ -116,6 +103,9 @@ bar_plot_2 = dcc.Graph(id='bar-graph-2')
 bar_plot_card_2 = dbc.Card([
     dbc.CardBody([
         variable3_dropdown,
+        html.Br(),
         bar_plot_2
     ])
-])
+],
+style={"border": "none", "boxShadow": "none"} 
+)

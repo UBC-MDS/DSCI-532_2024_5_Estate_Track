@@ -5,7 +5,7 @@ import plotly.express as px
 import dash_daq as daq
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from components import province_dropdown, city_dropdown, variable3_dropdown, card_avg_price, card_min_price, card_max_price,output_histogram, bar_plot_card_1, bar_plot_card_2, map_plot
+from components import province_dropdown, city_dropdown, card_avg_price, card_min_price, card_max_price,output_histogram, bar_plot_card_1, bar_plot_card_2, map_plot
 import callbacks
 import altair as alt
 import dash_vega_components as dvc
@@ -16,16 +16,27 @@ from vega_datasets import data
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
+#sidebar components
+sidebar = dbc.Col([
+    html.Img(src='/assets/logos/logo_main.png', className='img-fluid'),
+    html.Br(),
+    html.Br(),
+    html.H3('Global controls'),  # Corrected from HS to H3 for heading
+    html.Br(),
+    province_dropdown,
+    html.Br(),  # Added missing comma
+    city_dropdown,
+    html.Br()  
+])
+
+
 # Define the layout with a cleaner structure
 app.layout = dbc.Container(fluid=True, children=[
     # Two-column layout
     dbc.Row([
         # Left Column for filters and map with added spacing
         dbc.Col([
-            # Province and City dropdowns with additional vertical space
-
-            dbc.Col(province_dropdown, md=12, className="mb-4"),  # Increase bottom margin for spacing
-            dbc.Col(city_dropdown, md=12, className="mb-4"),  # Increase bottom margin for spacing
+                sidebar
         ], md=3),  
         
         # Right Column for cards and graphs
