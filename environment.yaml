@@ -17,4 +17,6 @@ dependencies:
     - pandas=2.2.*  
     - pip:
         - dash-daq==0.5.* 
+        - dash-vega-components==0.10.*
+        - vega-datasets==0.9.*
 
