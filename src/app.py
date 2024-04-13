@@ -16,15 +16,15 @@ from vega_datasets import data
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
-#sidebar components
 sidebar = dbc.Col([
     html.Img(src='/assets/logos/logo_main.png', className='img-fluid'),
     html.Br(),
+    html.H3('Global controls'),  # Heading for the sidebar
     html.Br(),
-    html.H3('Global controls'),  # Corrected from HS to H3 for heading
-    html.Br(),
+    html.H4('Select Province'),  # Title for the province dropdown
     province_dropdown,
-    html.Br(),  # Added missing comma
+    html.Br(),
+    html.H4('Select City'),  # Title for the city dropdown
     city_dropdown,
     html.Br()  
 ])

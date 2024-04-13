@@ -1,4 +1,27 @@
 /* custom_styles.css */
+
+/* custom_styles.css */
+
+/* Style for the sidebar */
+.sidebar {
+    padding: 20px;
+    background-color: #f8f9fa; /* Light grey background */
+    border-radius: 5px; /* Rounded corners for the sidebar */
+    margin-bottom: 20px; /* Space at the bottom of the sidebar */
+}
+
+/* Style for the titles above the dropdowns */
+.dropdown-title {
+    margin-bottom: 0.5rem; /* Space below the title */
+    color: #333; /* Dark grey text for better readability */
+    font-weight: bold; /* Make the title text bold */
+}
+
+/* Style for the dropdown components to give them consistent appearance */
+.custom-dropdown {
+    margin-bottom: 1rem; /* Space below the dropdown */
+}
+
 .card-common {
     margin-top: 20px;
     border-radius: 15px;

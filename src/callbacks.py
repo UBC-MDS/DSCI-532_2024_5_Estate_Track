@@ -203,6 +203,7 @@ def update_map(province, cities):
         ],
         [Input("province-dropdown", "value"), Input("city-dropdown", "value")],
     )
+
 def update_histogram_and_price_cards(province, cities):
     filtered_df = df[df["Province"] == province]
 
