@@ -6,6 +6,10 @@ import dash_daq as daq
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from data import df
+import altair as alt
+import dash_vega_components as dvc
+import altair as alt
+from vega_datasets import data
 
 
 
@@ -54,7 +58,7 @@ variable3_dropdown = dbc.Row([
     ), width=10)
 ], className="mb-3")
 
-output_histogram = dcc.Graph(id='output-histogram')
+output_histogram = dvc.Vega(id='output-histogram', spec={})
 
 # Card for displaying the average, min and max price dynamically
 card_avg_price = dbc.Card(id='card-avg-price', children=[
