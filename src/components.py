@@ -58,9 +58,6 @@ variable3_dropdown = dbc.Row([
     ), width=10)
 ], className="mb-3")
 
-output_histogram = dvc.Vega(id='output-histogram', spec={})
-
-
 # Card for displaying the minimum price dynamically
 card_min_price = dbc.Card(
     id='card-min-price', 
@@ -93,3 +90,16 @@ card_max_price = dbc.Card(
     ],
     className="card-common card-max-price"  
 )
+
+#bar plot of numeric column
+bar_plot_1 = dcc.Graph(id='bar-graph-1')
+
+#histogram plot of price
+output_histogram = dvc.Vega(id='output-histogram', spec={})
+
+
+#map plot
+map_plot = dcc.Graph(id='map-graph')
+
+#bar plot of bedrooms and bathrooms
+bar_plot_2 = dcc.Graph(id='bar-graph-2')
