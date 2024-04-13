@@ -50,8 +50,8 @@ app.layout = dbc.Container(fluid=True, children=[
             
             # Row for Bar Graph and Histogram
             dbc.Row([
-                dbc.Col(bar_plot_card_1, md=6),
-                dbc.Col(output_histogram, md=6)
+                dbc.Col(output_histogram, md=6),
+                dbc.Col(bar_plot_card_1, md=6)
             ], className="mb-3"),
 
             dbc.Row([
