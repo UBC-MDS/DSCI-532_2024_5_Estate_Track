@@ -196,9 +196,9 @@ def update_map(province, cities):
 
 @callback(
         [
-            Output("output-histogram", "spec"), # Note that we are using "spec" instead of "figure" for Vega components
-            Output("card-avg-price", "children"),
+            Output("output-histogram", "spec"), 
             Output("card-min-price", "children"),
+            Output("card-avg-price", "children"),
             Output("card-max-price", "children"),
         ],
         [Input("province-dropdown", "value"), Input("city-dropdown", "value")],
@@ -241,13 +241,13 @@ def update_histogram_and_price_cards(province, cities):
 
 
     # Calculate statistics for price cards
-    avg_price = filtered_df["Price"].mean() if not filtered_df.empty else "N/A"
     min_price = filtered_df["Price"].min() if not filtered_df.empty else "N/A"
+    avg_price = filtered_df["Price"].mean() if not filtered_df.empty else "N/A"
     max_price = filtered_df["Price"].max() if not filtered_df.empty else "N/A"
 
     # Update card contents
-    avg_card_content = dbc.CardBody(f"Average Price: ${avg_price:,.2f}")
-    min_card_content = dbc.CardBody(f"Minimum Price: ${min_price:,.2f}")
-    max_card_content = dbc.CardBody(f"Maximum Price: ${max_price:,.2f}")
+    min_card_content = dbc.CardBody(f"Minimum Price: ${min_price:,.2f}", className="card-text")
+    avg_card_content = dbc.CardBody(f"Average Price: ${avg_price:,.2f}", className="card-text")
+    max_card_content = dbc.CardBody(f"Maximum Price: ${max_price:,.2f}", className="card-text")
 
     return vega_spec, avg_card_content, min_card_content, max_card_content

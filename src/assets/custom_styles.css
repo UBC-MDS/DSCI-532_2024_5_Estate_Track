@@ -1,0 +1,28 @@
+/* custom_styles.css */
+.card-common {
+    margin-top: 20px;
+    border-radius: 15px;
+    color: white;
+    padding: 20px;
+}
+
+.card-min-price {
+    background-color: #7978E9; 
+    margin-right: 10px;
+}
+
+.card-avg-price {
+    background-color: #4B49AC; 
+}
+
+.card-max-price {
+    background-color: #7DA0FA; 
+}
+
+.card-number {
+    font-size: 48px; 
+}
+
+.card-text {
+    font-size: 24px; 
+}

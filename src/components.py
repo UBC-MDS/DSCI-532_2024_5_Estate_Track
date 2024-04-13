@@ -60,19 +60,36 @@ variable3_dropdown = dbc.Row([
 
 output_histogram = dvc.Vega(id='output-histogram', spec={})
 
-# Card for displaying the average, min and max price dynamically
-card_avg_price = dbc.Card(id='card-avg-price', children=[
-    dbc.CardBody([
-        html.P("Select a province to see the average price", className="card-text")
-    ])
-], style={"marginTop": "20px"})
-card_min_price = dbc.Card(id='card-min-price', children=[
-    dbc.CardBody([
-        html.P("Select a province to see the minimum price", className="card-text")
-    ])
-], style={"marginTop": "20px", "marginRight": "10px"})
-card_max_price = dbc.Card(id='card-max-price', children=[
-    dbc.CardBody([
-        html.P("Select a province to see the maximum price", className="card-text")
-    ])
-], style={"marginTop": "20px", "marginLeft": "10px"})
+
+# Card for displaying the minimum price dynamically
+card_min_price = dbc.Card(
+    id='card-min-price', 
+    children=[
+        dbc.CardBody([
+            html.P("Select a province to see the minimum price", className="card-text")
+        ])
+    ],
+    className="card-common card-min-price"  
+)
+
+# Card for displaying the average price dynamically
+card_avg_price = dbc.Card(
+    id='card-avg-price',
+    children=[
+        dbc.CardBody([
+            html.P("Select a province to see the average price", className="card-text")
+        ])
+    ],
+    className="card-common card-avg-price"  
+)
+
+# Card for displaying the maximum price dynamically
+card_max_price = dbc.Card(
+    id='card-max-price', 
+    children=[
+        dbc.CardBody([
+            html.P("Select a province to see the maximum price", className="card-text")
+        ])
+    ],
+    className="card-common card-max-price"  
+)
