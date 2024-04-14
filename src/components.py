@@ -90,9 +90,7 @@ sidebar = dbc.Col([
     html.Br(),
     html.Br(),
     html.P(
-        "HomeScope is a data analysis dashboard aimed at providing stakeholders "
-        "in the real estate industry with actionable insights derived from comprehensive "
-        "analysis of key variables.",  # Description text
+        "Welcome to HomeScope, the gateway to actionable insights in real estate. Dive deep into key data and empower your decisions with our comprehensive analysis tool.",  # Description text
         className='text-muted'
     ),
     html.Br(),
