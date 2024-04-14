@@ -7,8 +7,9 @@
     padding: 20px;
     background-color: #466ccc; /* Light grey background */
     border-radius: 5px; /* Rounded corners for the sidebar */
-    margin-bottom: 20px; /* Space at the bottom of the sidebar */
+    margin-bottom: 100px; /* Space at the bottom of the sidebar */
 }
+
 
 /* Style for the titles above the dropdowns */
 .dropdown-title {

@@ -8,6 +8,7 @@ import altair as alt
 import dash_vega_components as dvc
 import altair as alt
 from vega_datasets import data
+import numpy as np
 
 
 from data import df
@@ -192,8 +193,14 @@ def update_map(province, cities):
                                 color_continuous_scale="RdYlGn_r")
     map_fig.update_layout(
     mapbox_style="open-street-map",
-    margin={"r": 0, "t": 0, "l": 0, "b": 0},
-    title_text=f'Geospatial view of {province} House Prices',  # Set the title here
+    margin={"r": 0, "t": 70, "l": 40, "b": 0},
+    title={
+         'text': f'Geospatial view of {province} House Prices',
+         'y':0.9,
+         'x':0.5,
+         'xanchor': 'center',
+         'yanchor': 'top'
+     },
     barmode='group'
 )
     
@@ -209,6 +216,34 @@ def update_map(province, cities):
         [Input("province-dropdown", "value"), Input("city-dropdown", "value")],
     )
 
+# def update_histogram_and_price_cards(province, cities):
+#     filtered_df = df[df["Province"] == province]
+
+#     if isinstance(cities, str):
+#         cities = [cities]  # Ensure cities is a list
+#     filtered_df = filtered_df[filtered_df["City"].isin(cities)]
+
+#     # Prepare the figure
+#     fig = go.Figure()
+
+#     # Create a histogram for each city
+#     for city in filtered_df['City'].unique():
+#         city_data = filtered_df[filtered_df['City'] == city]['Price']
+#         fig.add_trace(go.Histogram(x=city_data, name=city, histnorm='probability density',opacity=0.6))
+
+
+#     # Update layout to stack histograms
+#     fig.update_layout(
+#         barmode='overlay',  # Histograms are plotted on top of one another
+#         xaxis_title_text='Price',  # X-axis label
+#         yaxis_title_text='Count',  # Y-axis label
+#         legend_title_text='City'   # Legend title
+#     )
+#     fig.update_traces(opacity=0.75) 
+#     fig.update_layout(title_text=f'Comparison of House Prices in {province}',
+#                      barmode='group')
+
+
 def update_histogram_and_price_cards(province, cities):
     filtered_df = df[df["Province"] == province]
 
@@ -219,22 +254,31 @@ def update_histogram_and_price_cards(province, cities):
     # Prepare the figure
     fig = go.Figure()
 
-    # Create a histogram for each city
-    for city in filtered_df['City'].unique():
+    for city in cities:
         city_data = filtered_df[filtered_df['City'] == city]['Price']
-        fig.add_trace(go.Histogram(x=city_data, name=city, opacity=0.6))
+        # Create a histogram with very fine bins
+        hist_data = np.histogram(city_data, bins=200)
+        hist_y = hist_data[0] / np.max(hist_data[0])  # Normalize histogram
+        hist_x = (hist_data[1][1:] + hist_data[1][:-1]) / 2  # Midpoints of bins
+        
+        # Smooth the histogram using a moving average
+        window_size = 5  # Increase for more smoothing
+        window = np.ones(window_size) / window_size
+        hist_y_smooth = np.convolve(hist_y, window, mode='same')
+        
+        # Add the histogram and the smooth line to the figure
+        fig.add_trace(go.Bar(x=hist_x, y=hist_y, name=f'{city} Histogram', opacity=0.8,legendgroup=city)) # Darker color
+        fig.add_trace(go.Scatter(x=hist_x, y=hist_y_smooth, line_shape='spline',showlegend=False,legendgroup=city))
 
-
-    # Update layout to stack histograms
+    # Update layout
     fig.update_layout(
-        barmode='overlay',  # Histograms are plotted on top of one another
         xaxis_title_text='Price',  # X-axis label
-        yaxis_title_text='Count',  # Y-axis label
-        legend_title_text='City'   # Legend title
+        yaxis_title_text='Relative Frequency / Density',  # Y-axis label
+        legend_title_text='City',
+        barmode='overlay'  # Overlay the histograms
     )
-    fig.update_traces(opacity=0.75) 
-    fig.update_layout(title_text=f'Comparison of House Prices in {province}',
-                     barmode='group')
+    fig.update_traces(opacity=0.9)  # Set higher opacity for histogram bars
+    fig.update_layout(title_text=f'Comparison of House Prices in {province}')
 
 
     # Calculate statistics for price cards

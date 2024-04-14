@@ -19,14 +19,29 @@ server = app.server
 sidebar = dbc.Col([
     html.Img(src='/assets/logos/logo_main.png', className='img-fluid'),
     html.Br(),
-    html.H3('Global controls'),  # Heading for the sidebar
+   html.P(
+        "HomeScope is a data analysis project aimed at providing stakeholders "
+        "in the real estate industry with actionable insights derived from comprehensive "
+        "analysis of key variables.",  # Description text
+        className='text-muted'
+    ),
     html.Br(),
-    html.H4('Select Province'),  # Title for the province dropdown
+    html.H3('Global controls'),  # Heading for the sidebar
+    # html.Br(),
+    html.H5('Select Province'),  # Title for the province dropdown
     province_dropdown,
     html.Br(),
-    html.H4('Select City'),  # Title for the city dropdown
+    html.H5('Select City'),  # Title for the city dropdown
     city_dropdown,
-    html.Br()  
+    html.Br() ,
+    html.Br(),
+    html.Br(),
+    html.Div([
+        html.P("Last Updated: 2024-04-05"),
+        html.P("Made by: @iris, @Carrie, @aishwarya, @nasim"),
+        html.P(html.A("Repo: Hotspot", href="https://github.com/your-repo")),
+    ], className="sidebar-footer"),
+ 
 ], className="sidebar")
 
 
