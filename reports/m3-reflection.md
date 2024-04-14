@@ -8,6 +8,10 @@ In Milestone 3, we updated our dashboard based on the instructor's review and ad
 
 The most significant deviation from our initial design was removing the scatter plots and replacing them with a bar chart. This change was made for efficiency and ease of comparison, such as when users wish to explore the popular types of bedrooms within cities. The addition of a histogram overlaid on the price distribution helps to identify and compare distribution patterns within cities easily. The addition of a sidebar separates the widgets and title from the main graph. All graphs share the same color theme to create a cohesive and visually appealing design. This engages viewers and draws attention to our significant findings.
 
+## Inspired-by-another-groups-work
+We learned how to set up the sidebar, focusing on the attributes, from UBC-MDS/DSCI-532_2024_16_SilentEpidemic on GitHub. Additionally, we discovered how to display links using CSS and explored various color styles.We were also inspired by them to learn how to integrate local widgets with plots inside a card.
+
+
 ## Conclusion, Limitation and Future Improvements
 
 In conclusion, our dashboard mostly aligns with our initial sketch. We applied various tools and charts to maximize our dashboard's functionality and interactivity. We use a similar color theme to visually engage and capture our viewers' attention while they interact with our dashboard. The dashboard responds fluidly to changes in input values, such as province, cities, and other attributes. In the future, we hope to add more functions, such as extending the comparison between cities within a province to the entire country.
