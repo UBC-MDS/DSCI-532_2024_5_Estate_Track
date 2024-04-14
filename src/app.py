@@ -3,15 +3,12 @@ import dash_bootstrap_components as dbc
 from components import sidebar, card_avg_price, card_min_price, card_max_price,output_histogram, bar_plot_card_1, bar_plot_card_2, map_plot
 import callbacks
 
-
-
 # Initialize the Dash app with Bootstrap CSS
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
            title='HomeScope',
            suppress_callback_exceptions=True)
 
 server = app.server
-
 
 # Define the layout with a cleaner structure
 app.layout = dbc.Container(fluid=True, children=[
@@ -41,8 +38,6 @@ app.layout = dbc.Container(fluid=True, children=[
                 dbc.Col(map_plot, md=6),
                 dbc.Col(bar_plot_card_2, md=6)
             ], className="mb-3"),
-
-
         ], md=9),  
     ], align="stretch"),  
 ])  

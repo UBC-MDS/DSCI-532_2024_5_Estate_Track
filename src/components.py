@@ -88,8 +88,9 @@ bar_plot_card_1 = dbc.Card(
 sidebar = dbc.Col([
     html.Img(src='/assets/logos/logo_main.png', className='img-fluid'),
     html.Br(),
+    html.Br(),
     html.P(
-        "HomeScope is a data analysis project aimed at providing stakeholders "
+        "HomeScope is a data analysis dashboard aimed at providing stakeholders "
         "in the real estate industry with actionable insights derived from comprehensive "
         "analysis of key variables.",  # Description text
         className='text-muted'

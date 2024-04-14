@@ -130,7 +130,7 @@ def update_bar_chart(province, cities, var3):
                                  .groupby('City')
                                  .head(5))
 
-    color_seq = ['#98BDFF','#F3797E','#7DA0FA', '#7978E9', '#4B49AC']
+    color_seq = ['#98BDFF', '#7DA0FA', '#F3797E', '#7978E9', '#4B49AC']
 
     fig = px.bar(
         y=top_5_per_city[var3], 
@@ -246,10 +246,10 @@ def update_histogram_and_price_cards(province, cities):
 
     # Update layout
     fig.update_layout(
-        xaxis_title_text='Price',  # X-axis label
-        yaxis_title_text='Relative Frequency / Density',  # Y-axis label
+        xaxis_title_text='Price',  
+        yaxis_title_text='Relative Frequency / Density',  
         legend_title_text='City',
-        barmode='overlay'  # Overlay the histograms
+        barmode='overlay'  
     )
 
     fig.update_layout(title_text=f'Comparison of House Prices in {province}')
