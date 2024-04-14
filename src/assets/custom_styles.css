@@ -4,10 +4,19 @@
 
 /* Style for the sidebar */
 .sidebar {
+    margin-top: 20px;
     padding: 20px;
-    background-color: #466ccc; /* Light grey background */
-    border-radius: 5px; /* Rounded corners for the sidebar */
+    background-color: #7DA0FA; /* Light grey background */
+    border-radius: 15px; /* Rounded corners for the sidebar */
     margin-bottom: 100px; /* Space at the bottom of the sidebar */
+}
+
+.text-muted {
+    font-size: 24px; 
+}
+
+.sidebar-footer {
+    font-size: 20px;
 }
 
 
@@ -23,24 +32,29 @@
     margin-bottom: 1rem; /* Space below the dropdown */
 }
 
-.card-common {
+.card-min-price {
     margin-top: 20px;
     border-radius: 15px;
     color: white;
     padding: 20px;
-}
-
-.card-min-price {
-    background-color: #7978E9; 
+    background-color: #9896df; 
     margin-right: 10px;
 }
 
-.card-avg-price {
-    background-color: #5b5aae; 
+.card-avg-price{
+    margin-top: 20px;
+    border-radius: 15px;
+    color: white;
+    padding: 20px;
+    background-color: #7c7bd4; 
 }
 
 .card-max-price {
-    background-color: #7DA0FA; 
+    margin-top: 20px;
+    border-radius: 15px;
+    color: white;
+    padding: 20px;
+    background-color: #87a3eb; 
 }
 
 .card-number {
@@ -48,5 +62,8 @@
 }
 
 .card-text {
-    font-size: 24px; 
+    font-size: 28px; 
+    border-style: none;
 }
+
+

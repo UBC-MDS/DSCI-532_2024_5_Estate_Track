@@ -28,21 +28,21 @@ variable1_dropdown = dcc.Dropdown(
         id='variable1-dropdown',
         options=[feature for feature in df[['Price','Bedrooms', 'Bathrooms','Population','Median Family Income' ]]],
         value='Price',
-        style={'width': '100%'}
+        style={'width': '95%', 'margin-left': '20px'}
     )
 
 variable2_dropdown = dcc.Dropdown(
         id='variable2-dropdown',
         options=[feature for feature in df[['Price','Bedrooms', 'Bathrooms','Population','Median Family Income'  ]]],
         value='Median Family Income',
-        style={'width': '100%'}
+        style={'width': '95%','margin-left': '20px'}
     )
 
 variable3_dropdown = dcc.Dropdown(
         id='variable3-dropdown',
         options=[feature for feature in df[['Bedrooms', 'Bathrooms']]],
         value='Bedrooms',
-        style={'width': '100%'}
+        style={'width': '88%', 'margin-left': '20px'}
     )
 
 # Card for displaying the minimum price dynamically
@@ -53,7 +53,7 @@ card_min_price = dbc.Card(
             html.P("Select a province to see the minimum price", className="card-text")
         ])
     ],
-    className="card-common card-min-price"  
+    className="card-min-price"  
 )
 
 # Card for displaying the average price dynamically
@@ -64,7 +64,7 @@ card_avg_price = dbc.Card(
             html.P("Select a province to see the average price", className="card-text")
         ])
     ],
-    className="card-common card-avg-price"  
+    className="card-avg-price"  
 )
 
 # Card for displaying the maximum price dynamically
@@ -75,7 +75,7 @@ card_max_price = dbc.Card(
             html.P("Select a province to see the maximum price", className="card-text")
         ])
     ],
-    className="card-common card-max-price"  
+    className="card-max-price"  
 )
 
 #bar plot of numeric column

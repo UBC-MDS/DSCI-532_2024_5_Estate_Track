@@ -197,8 +197,8 @@ def update_map(province, cities):
     title={
          'text': f'Geospatial view of {province} House Prices',
          'y':0.9,
-         'x':0.5,
-         'xanchor': 'center',
+         'x':0.05,
+         'xanchor': 'left',
          'yanchor': 'top'
      },
     barmode='group'
@@ -215,34 +215,6 @@ def update_map(province, cities):
         ],
         [Input("province-dropdown", "value"), Input("city-dropdown", "value")],
     )
-
-# def update_histogram_and_price_cards(province, cities):
-#     filtered_df = df[df["Province"] == province]
-
-#     if isinstance(cities, str):
-#         cities = [cities]  # Ensure cities is a list
-#     filtered_df = filtered_df[filtered_df["City"].isin(cities)]
-
-#     # Prepare the figure
-#     fig = go.Figure()
-
-#     # Create a histogram for each city
-#     for city in filtered_df['City'].unique():
-#         city_data = filtered_df[filtered_df['City'] == city]['Price']
-#         fig.add_trace(go.Histogram(x=city_data, name=city, histnorm='probability density',opacity=0.6))
-
-
-#     # Update layout to stack histograms
-#     fig.update_layout(
-#         barmode='overlay',  # Histograms are plotted on top of one another
-#         xaxis_title_text='Price',  # X-axis label
-#         yaxis_title_text='Count',  # Y-axis label
-#         legend_title_text='City'   # Legend title
-#     )
-#     fig.update_traces(opacity=0.75) 
-#     fig.update_layout(title_text=f'Comparison of House Prices in {province}',
-#                      barmode='group')
-
 
 def update_histogram_and_price_cards(province, cities):
     filtered_df = df[df["Province"] == province]
@@ -266,9 +238,16 @@ def update_histogram_and_price_cards(province, cities):
         window = np.ones(window_size) / window_size
         hist_y_smooth = np.convolve(hist_y, window, mode='same')
         
-        # Add the histogram and the smooth line to the figure
-        fig.add_trace(go.Bar(x=hist_x, y=hist_y, name=f'{city} Histogram', opacity=0.8,legendgroup=city)) # Darker color
-        fig.add_trace(go.Scatter(x=hist_x, y=hist_y_smooth, line_shape='spline',showlegend=False,legendgroup=city))
+        # Add the smoothed line to the figure with area fill
+        fig.add_trace(go.Scatter(
+            x=hist_x, 
+            y=hist_y_smooth, 
+            fill='tozeroy', 
+            mode='lines', 
+            line_shape='spline', 
+            name=f'{city}', 
+            legendgroup=city
+        ))
 
     # Update layout
     fig.update_layout(
@@ -277,7 +256,7 @@ def update_histogram_and_price_cards(province, cities):
         legend_title_text='City',
         barmode='overlay'  # Overlay the histograms
     )
-    fig.update_traces(opacity=0.9)  # Set higher opacity for histogram bars
+
     fig.update_layout(title_text=f'Comparison of House Prices in {province}')
 
 

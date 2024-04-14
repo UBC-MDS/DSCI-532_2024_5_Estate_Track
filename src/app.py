@@ -7,19 +7,21 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from components import province_dropdown, city_dropdown, card_avg_price, card_min_price, card_max_price,output_histogram, bar_plot_card_1, bar_plot_card_2, map_plot
 import callbacks
-import altair as alt
 import dash_vega_components as dvc
 import altair as alt
-from vega_datasets import data
+
 
 # Initialize the Dash app with Bootstrap CSS
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
+           title='HomeScope',
+           suppress_callback_exceptions=True)
+
 server = app.server
 
 sidebar = dbc.Col([
     html.Img(src='/assets/logos/logo_main.png', className='img-fluid'),
     html.Br(),
-   html.P(
+    html.P(
         "HomeScope is a data analysis project aimed at providing stakeholders "
         "in the real estate industry with actionable insights derived from comprehensive "
         "analysis of key variables.",  # Description text
@@ -27,7 +29,7 @@ sidebar = dbc.Col([
     ),
     html.Br(),
     html.H3('Global controls'),  # Heading for the sidebar
-    # html.Br(),
+    html.Br(),
     html.H5('Select Province'),  # Title for the province dropdown
     province_dropdown,
     html.Br(),
@@ -37,9 +39,9 @@ sidebar = dbc.Col([
     html.Br(),
     html.Br(),
     html.Div([
-        html.P("Last Updated: 2024-04-05"),
-        html.P("Made by: @iris, @Carrie, @aishwarya, @nasim"),
-        html.P(html.A("Repo: Hotspot", href="https://github.com/your-repo")),
+        html.P("Last Updated: 2024-04-15"),
+        html.P("Made by: @Iris, @Aishwarya, @Carrie,  @Nasim"),
+        html.P(html.A("Repo: HomeScope", href="https://github.com/UBC-MDS/DSCI-532_2024_5_HomeScope")),
     ], className="sidebar-footer"),
  
 ], className="sidebar")
@@ -52,7 +54,7 @@ app.layout = dbc.Container(fluid=True, children=[
         # Left Column for filters and map with added spacing
         dbc.Col([
                 sidebar
-        ], md=3),  
+        ], md=3, style={'display': 'flex', 'flexDirection': 'column'}),  
         
         # Right Column for cards and graphs
         dbc.Col([
@@ -61,7 +63,7 @@ app.layout = dbc.Container(fluid=True, children=[
                 dbc.Col(card_avg_price, md=4),
                 dbc.Col(card_min_price, md=4),
                 dbc.Col(card_max_price, md=4)
-            ], className="mb-3"),  # Add margin at the bottom of the row
+            ], className="mb-3"), 
             
             # Row for Bar Graph and Histogram
             dbc.Row([
@@ -75,9 +77,9 @@ app.layout = dbc.Container(fluid=True, children=[
             ], className="mb-3"),
 
 
-        ], md=9),  # Adjust the width as per your design
-    ], align="stretch"),  # Add margin at the bottom of the row
-])  # Add margin at the top of the container
+        ], md=9),  
+    ], align="stretch"),  
+])  
 
 
 # Run the Dash application
