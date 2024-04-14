@@ -27,19 +27,22 @@ city_dropdown = dcc.Dropdown(
 variable1_dropdown = dcc.Dropdown(
         id='variable1-dropdown',
         options=[feature for feature in df[['Price','Bedrooms', 'Bathrooms','Population','Median Family Income' ]]],
-        value='Price'
+        value='Price',
+        style={'width': '100%'}
     )
 
 variable2_dropdown = dcc.Dropdown(
         id='variable2-dropdown',
         options=[feature for feature in df[['Price','Bedrooms', 'Bathrooms','Population','Median Family Income'  ]]],
-        value='Median Family Income'
+        value='Median Family Income',
+        style={'width': '100%'}
     )
 
 variable3_dropdown = dcc.Dropdown(
         id='variable3-dropdown',
         options=[feature for feature in df[['Bedrooms', 'Bathrooms']]],
-        value='Bedrooms'
+        value='Bedrooms',
+        style={'width': '100%'}
     )
 
 # Card for displaying the minimum price dynamically
@@ -79,19 +82,20 @@ card_max_price = dbc.Card(
 bar_plot_1 = dcc.Graph(id='bar-graph-1')
 
 #bar plot1 add two dropdown
-bar_plot_card_1 = dbc.Card([
+bar_plot_card_1 = dbc.Card(
     dbc.CardBody([
-        variable1_dropdown,
-        html.Br(),
-        variable2_dropdown,
-        bar_plot_1
-    ])
-],
-style={"border": "none", "boxShadow": "none"} 
+        dbc.Row([
+            dbc.Col(variable1_dropdown, md=6), 
+            dbc.Col(variable2_dropdown, md=6)  
+        ]),
+        bar_plot_1  
+    ]),
+    style={"border": "none", "boxShadow": "none"}
 )
 
+
 #histogram plot of price
-output_histogram = dvc.Vega(id='output-histogram', spec={})
+output_histogram = dcc.Graph(id='output-histogram')
 
 #map plot
 map_plot = dcc.Graph(id='map-graph')
@@ -103,7 +107,6 @@ bar_plot_2 = dcc.Graph(id='bar-graph-2')
 bar_plot_card_2 = dbc.Card([
     dbc.CardBody([
         variable3_dropdown,
-        html.Br(),
         bar_plot_2
     ])
 ],

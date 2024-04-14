@@ -27,7 +27,7 @@ sidebar = dbc.Col([
     html.H4('Select City'),  # Title for the city dropdown
     city_dropdown,
     html.Br()  
-])
+], className="sidebar")
 
 
 # Define the layout with a cleaner structure
@@ -61,8 +61,8 @@ app.layout = dbc.Container(fluid=True, children=[
 
 
         ], md=9),  # Adjust the width as per your design
-    ], className="mb-5"),  # Add margin at the bottom of the row
-], className="mt-5")  # Add margin at the top of the container
+    ], align="stretch"),  # Add margin at the bottom of the row
+])  # Add margin at the top of the container
 
 
 # Run the Dash application
