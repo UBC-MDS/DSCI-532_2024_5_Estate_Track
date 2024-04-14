@@ -240,8 +240,9 @@ def update_histogram_and_price_cards(province, cities):
             fill='tozeroy', 
             mode='lines', 
             line_shape='spline', 
-            name=f'{city}', 
+            name=city, 
             legendgroup=city
+            
         ))
 
     # Update layout
@@ -249,7 +250,8 @@ def update_histogram_and_price_cards(province, cities):
         xaxis_title_text='Price',  
         yaxis_title_text='Relative Frequency / Density',  
         legend_title_text='City',
-        barmode='overlay'  
+        barmode='overlay',
+        showlegend=True 
     )
 
     fig.update_layout(title_text=f'Comparison of House Prices in {province}')
