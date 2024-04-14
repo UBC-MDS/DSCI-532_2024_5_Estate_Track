@@ -1,13 +1,8 @@
-from dash import Dash, html, dcc, Input, Output,callback
+from dash import Input, Output,callback
 import dash_bootstrap_components as dbc
 import plotly.express as px
-import dash_daq as daq
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-import altair as alt
-import dash_vega_components as dvc
-import altair as alt
-from vega_datasets import data
 import numpy as np
 
 
