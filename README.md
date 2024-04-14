@@ -19,7 +19,7 @@ Thank you for visiting the `HomeScope` project repository. This README file is a
 
 <img src="img/Homescope_img.png" width="500"/>
 
-## Who Are We?
+## Who Are We? 
 
 Our `HomeScope` team, comprised of adept developers and data scientists, is driven by a shared passion for inclusivity and technology. Our expertise in data analysis underpins our commitment to this project.
 
@@ -47,7 +47,7 @@ Our `HomeScope` dashboard is an empowering tool that enables:
 -   Community-driven contributions to our database, fostering growth and inclusivity.
 -   The synthesis of valuable insights to facilitate well-informed real estate decisions.
 
-## What Are We Doing?
+## What Are We Doing? 
 
 ### The Dashboard
 
@@ -60,7 +60,7 @@ The current iteration of `HomeScope` boasts:
 -   An interactive map to visualize geographical data and price distributions.
 -   Comparative visualizations that convey a thorough market overview.
 
-### Dashboard Design (Milestone2)
+### Dashboard Design (Milestone3)
 
 <img src="img/milestone3.png" width="1000"/>
 
@@ -72,7 +72,7 @@ We are poised to refine `HomeScope` further, enhancing its interactivity and use
 
 Encountered an issue or have a question? Feel free to [open an issue](#get-support) in this repository, and our team will be happy to assist you.
 
-## Collaboration
+## Collaboration 
 
 Our project is a collaborative endeavor, with each team member playing a pivotal role:
 
@@ -81,7 +81,7 @@ Our project is a collaborative endeavor, with each team member playing a pivotal
 -   [Carrie Yan](https://github.com/carrieyanyi)
 -   [Nasim Ghazanfari Nasrabadi](https://github.com/nassimgha)
 
-## Join Our Journey 
+## Join Our Journey
 
 Dive into `HomeScope` and join us in forging a more transparent and inclusive real estate landscape.
 
@@ -149,11 +149,11 @@ This will launch the application, typically at <http://127.0.0.1:8050/> in your 
 
 Your contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. Please read our [Contribution Guidelines](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests to us.
 
-## Thank You
+## Thank You 
 
 Thank you so much (Danke schön! Merci beaucoup!) for visiting our project. We hope you'll join us on this exciting journey to empower stakeholders in the real estate sector with HomeScope.
 
-## Glossary
+## Glossary 
 
 -   README file: A document introducing an open project to the public and potential contributors, typically including installation, usage, and contribution information.
 -   Repository (or Repo): A collection of documents related to your project, where you create and save new code or content, often hosted on platforms like GitHub or Bitbucket.
