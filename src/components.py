@@ -1,78 +1,133 @@
-from dash import Dash, html, dcc, Input, Output
+from dash import html, dcc
 import dash_bootstrap_components as dbc
-import pandas as pd
-import plotly.express as px
-import dash_daq as daq
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 from data import df
-import altair as alt
-import dash_vega_components as dvc
-import altair as alt
-from vega_datasets import data
 
 
 
 #Dropdowns for province, cities and variable 
-province_dropdown = dbc.Row([
-    dbc.Col(html.Label("Province", className='form-label'), width=2),
-    dbc.Col(dcc.Dropdown(
+province_dropdown = dcc.Dropdown(
         id='province-dropdown',
         options=[{'label': province, 'value': province} for province in sorted(df['Province'].unique())],
         value='British Columbia'
-    ), width=10)
-], className="mb-3")
+    )
 
-city_dropdown = dbc.Row([
-    dbc.Col(html.Label("City", className='form-label'), width=2),
-    dbc.Col(dcc.Dropdown(
+city_dropdown = dcc.Dropdown(
         id='city-dropdown',
         multi=True
-    ), width=10)
-], className="mb-3")
+    )
 
-variable1_dropdown = dbc.Row([
-    dbc.Col(html.Label("Bar Plot First Variable", className='form-label'), width=2),
-    dbc.Col(dcc.Dropdown(
+variable1_dropdown = dcc.Dropdown(
         id='variable1-dropdown',
         options=[feature for feature in df[['Price','Bedrooms', 'Bathrooms','Population','Median Family Income' ]]],
-        value='Price'
-    ), width=10)
-], className="mb-3")
+        value='Price',
+        style={'width': '95%', 'margin-left': '20px'}
+    )
 
-variable2_dropdown = dbc.Row([
-    dbc.Col(html.Label("Bar Plot Second Variable", className='form-label'), width=2),
-    dbc.Col(dcc.Dropdown(
+variable2_dropdown = dcc.Dropdown(
         id='variable2-dropdown',
         options=[feature for feature in df[['Price','Bedrooms', 'Bathrooms','Population','Median Family Income'  ]]],
-        value='Median Family Income'
-    ), width=10)
-], className="mb-3")
+        value='Median Family Income',
+        style={'width': '95%','margin-left': '20px'}
+    )
 
-variable3_dropdown = dbc.Row([
-    dbc.Col(html.Label("Bar Plot Third Variable", className='form-label'), width=2),
-    dbc.Col(dcc.Dropdown(
+variable3_dropdown = dcc.Dropdown(
         id='variable3-dropdown',
         options=[feature for feature in df[['Bedrooms', 'Bathrooms']]],
-        value='Bedrooms'
-    ), width=10)
-], className="mb-3")
+        value='Bedrooms',
+        style={'width': '88%', 'margin-left': '20px'}
+    )
 
-output_histogram = dvc.Vega(id='output-histogram', spec={})
+# Card for displaying the minimum price dynamically
+card_min_price = dbc.Card(
+    id='card-min-price', 
+    children=[
+        dbc.CardBody([
+            html.P("Select a province to see the minimum price", className="card-text")
+        ])
+    ],
+    className="card-min-price"  
+)
 
-# Card for displaying the average, min and max price dynamically
-card_avg_price = dbc.Card(id='card-avg-price', children=[
+# Card for displaying the average price dynamically
+card_avg_price = dbc.Card(
+    id='card-avg-price',
+    children=[
+        dbc.CardBody([
+            html.P("Select a province to see the average price", className="card-text")
+        ])
+    ],
+    className="card-avg-price"  
+)
+
+# Card for displaying the maximum price dynamically
+card_max_price = dbc.Card(
+    id='card-max-price', 
+    children=[
+        dbc.CardBody([
+            html.P("Select a province to see the maximum price", className="card-text")
+        ])
+    ],
+    className="card-max-price"  
+)
+
+#bar plot of numeric column
+bar_plot_1 = dcc.Graph(id='bar-graph-1')
+
+#bar plot1 add two dropdown
+bar_plot_card_1 = dbc.Card(
     dbc.CardBody([
-        html.P("Select a province to see the average price", className="card-text")
-    ])
-], style={"marginTop": "20px"})
-card_min_price = dbc.Card(id='card-min-price', children=[
+        dbc.Row([
+            dbc.Col(variable1_dropdown, md=6), 
+            dbc.Col(variable2_dropdown, md=6)  
+        ]),
+        bar_plot_1  
+    ]),
+    style={"border": "none", "boxShadow": "none"}
+)
+
+sidebar = dbc.Col([
+    html.Img(src='/assets/logos/logo_main.png', className='img-fluid'),
+    html.Br(),
+    html.Br(),
+    html.P(
+        "Welcome to HomeScope, the gateway to actionable insights in real estate. Dive deep into key data and empower your decisions with our comprehensive analysis tool.",  # Description text
+        className='text-muted'
+    ),
+    html.Br(),
+    html.H3('Global controls'),  # Heading for the sidebar
+    html.Br(),
+    html.H5('Select Province'),  # Title for the province dropdown
+    province_dropdown,
+    html.Br(),
+    html.H5('Select City'),  # Title for the city dropdown
+    city_dropdown,
+    html.Br() ,
+    html.Br(),
+    html.Br(),
+    html.Div([
+        html.P("Last Updated: 2024-04-15"),
+        html.P("Made by: @Iris, @Aishwarya, @Carrie,  @Nasim"),
+        html.P(html.A("Repo: HomeScope", href="https://github.com/UBC-MDS/DSCI-532_2024_5_HomeScope")),
+    ], className="sidebar-footer"),
+ 
+], className="sidebar")
+
+
+#histogram plot of price
+output_histogram = dcc.Graph(id='output-histogram')
+
+#map plot
+map_plot = dcc.Graph(id='map-graph')
+
+#bar plot of bedrooms and bathrooms
+bar_plot_2 = dcc.Graph(id='bar-graph-2')
+
+#bar plot2 add one dropdown
+bar_plot_card_2 = dbc.Card([
     dbc.CardBody([
-        html.P("Select a province to see the minimum price", className="card-text")
+        variable3_dropdown,
+        bar_plot_2
     ])
-], style={"marginTop": "20px", "marginRight": "10px"})
-card_max_price = dbc.Card(id='card-max-price', children=[
-    dbc.CardBody([
-        html.P("Select a province to see the maximum price", className="card-text")
-    ])
-], style={"marginTop": "20px", "marginLeft": "10px"})
+],
+style={"border": "none", "boxShadow": "none"} 
+)

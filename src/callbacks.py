@@ -1,13 +1,10 @@
-from dash import Dash, html, dcc, Input, Output,callback
+from dash import Input, Output,callback
 import dash_bootstrap_components as dbc
 import plotly.express as px
-import dash_daq as daq
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-import altair as alt
-import dash_vega_components as dvc
-import altair as alt
-from vega_datasets import data
+import numpy as np
+
 
 from data import df
 
@@ -133,7 +130,7 @@ def update_bar_chart(province, cities, var3):
                                  .groupby('City')
                                  .head(5))
 
-    color_seq = ['#98BDFF','#F3797E','#7DA0FA', '#7978E9', '#4B49AC']
+    color_seq = ['#98BDFF', '#7DA0FA', '#F3797E', '#7978E9', '#4B49AC']
 
     fig = px.bar(
         y=top_5_per_city[var3], 
@@ -189,65 +186,85 @@ def update_map(province, cities):
                                 zoom=5,
                                 center={"lat": avg_lat, "lon": avg_lon},
                                 color_continuous_scale="RdYlGn_r")
-    map_fig.update_layout(mapbox_style="open-street-map")
-    map_fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    map_fig.update_layout(
+    mapbox_style="open-street-map",
+    margin={"r": 0, "t": 70, "l": 40, "b": 0},
+    title={
+         'text': f'Geospatial view of {province} House Prices',
+         'y':0.9,
+         'x':0.05,
+         'xanchor': 'left',
+         'yanchor': 'top'
+     },
+    barmode='group'
+)
     
     return map_fig
 
 @callback(
         [
-            Output("output-histogram", "spec"), # Note that we are using "spec" instead of "figure" for Vega components
-            Output("card-avg-price", "children"),
+            Output("output-histogram", "figure"), 
             Output("card-min-price", "children"),
+            Output("card-avg-price", "children"),
             Output("card-max-price", "children"),
         ],
         [Input("province-dropdown", "value"), Input("city-dropdown", "value")],
     )
+
 def update_histogram_and_price_cards(province, cities):
     filtered_df = df[df["Province"] == province]
 
     if isinstance(cities, str):
         cities = [cities]  # Ensure cities is a list
-
     filtered_df = filtered_df[filtered_df["City"].isin(cities)]
-    # Assuming you want to plot densities for two cities: 'City A' and 'City B'
 
-    hist = alt.Chart(filtered_df).mark_bar(opacity=0.3).encode(
-        alt.X('Price:Q', bin=alt.Bin(maxbins=100)),  # Adjust 'maxbins' as needed
-        alt.Y('count()', stack=None),
-        color='City:N'
+    # Prepare the figure
+    fig = go.Figure()
+
+    for city in cities:
+        city_data = filtered_df[filtered_df['City'] == city]['Price']
+        # Create a histogram with very fine bins
+        hist_data = np.histogram(city_data, bins=200)
+        hist_y = hist_data[0] / np.max(hist_data[0])  # Normalize histogram
+        hist_x = (hist_data[1][1:] + hist_data[1][:-1]) / 2  # Midpoints of bins
+        
+        # Smooth the histogram using a moving average
+        window_size = 5  # Increase for more smoothing
+        window = np.ones(window_size) / window_size
+        hist_y_smooth = np.convolve(hist_y, window, mode='same')
+        
+        # Add the smoothed line to the figure with area fill
+        fig.add_trace(go.Scatter(
+            x=hist_x, 
+            y=hist_y_smooth, 
+            fill='tozeroy', 
+            mode='lines', 
+            line_shape='spline', 
+            name=city, 
+            legendgroup=city
+            
+        ))
+
+    # Update layout
+    fig.update_layout(
+        xaxis_title_text='Price',  
+        yaxis_title_text='Relative Frequency / Density',  
+        legend_title_text='City',
+        barmode='overlay',
+        showlegend=True 
     )
 
-    # Define the density plot
-    density = alt.Chart(filtered_df).transform_density(
-        'Price',
-        as_=['Price', 'Density'],
-        groupby=['City']
-    ).mark_line().encode(
-        x=alt.X('Price:Q'),
-        y='Density:Q',
-        color='City'
-    )
-
-    # Overlay the histogram and the density plot
-    overlay = alt.layer(hist, density).resolve_scale(
-        y='independent'
-    )
-
-    # Convert the Altair chart to a Vega-Lite spec
-    vega_spec = overlay.to_dict()
-
-
+    fig.update_layout(title_text=f'Comparison of House Prices in {province}')
 
 
     # Calculate statistics for price cards
-    avg_price = filtered_df["Price"].mean() if not filtered_df.empty else "N/A"
     min_price = filtered_df["Price"].min() if not filtered_df.empty else "N/A"
+    avg_price = filtered_df["Price"].mean() if not filtered_df.empty else "N/A"
     max_price = filtered_df["Price"].max() if not filtered_df.empty else "N/A"
 
     # Update card contents
-    avg_card_content = dbc.CardBody(f"Average Price: ${avg_price:,.2f}")
-    min_card_content = dbc.CardBody(f"Minimum Price: ${min_price:,.2f}")
-    max_card_content = dbc.CardBody(f"Maximum Price: ${max_price:,.2f}")
+    min_card_content = dbc.CardBody(f"Minimum Price: ${min_price:,.2f}", className="card-text")
+    avg_card_content = dbc.CardBody(f"Average Price: ${avg_price:,.2f}", className="card-text")
+    max_card_content = dbc.CardBody(f"Maximum Price: ${max_price:,.2f}", className="card-text")
 
-    return vega_spec, avg_card_content, min_card_content, max_card_content
+    return fig, avg_card_content, min_card_content, max_card_content
