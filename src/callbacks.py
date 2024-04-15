@@ -138,27 +138,16 @@ def update_bar_chart(province, cities, var3):
         x='count',
         orientation='h',
         color='City',
-        text='count',
+        text=f"count",
         color_discrete_sequence=color_seq)
-        # hover_data={'count': False, 
-        #             var3: False, 
-        #             'count': True})
-    
-        # y=top_5_per_city[var3], 
-        # x=top_5_per_city['count'],
-        # orientation='h',
-        # color=top_5_per_city['City'],
-        # text=top_5_per_city['count'],
-        # color_discrete_sequence=color_seq,
-        # hover_data={top_5_per_city['count']: False, 
-        #             top_5_per_city[var3]: False, 
-        #             top_5_per_city['count']: True})
 
     # Update the layout of the bar chart
     fig.update_layout(title_text=f'Most Common Types {var3} in Selected Cities',
                       xaxis_title='Count',
                       yaxis_title=f'{var3}',
                       barmode='group')
+    fig.update_traces(textposition='outside')
+
     return fig
 
 # Update map graph
