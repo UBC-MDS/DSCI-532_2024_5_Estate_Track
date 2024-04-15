@@ -130,21 +130,24 @@ def update_bar_chart(province, cities, var3):
                                  .groupby('City')
                                  .head(5))
 
-    color_seq = ['#98BDFF', '#F3797E', '#7DA0FA', '#7978E9', '#4B49AC']
+    color_seq = ['#98BDFF', '#F3797E', '#8B1FB6', '#1FB69F' , '#D0116D', '#601FB6']
 
     fig = px.bar(
-        y=top_5_per_city[var3], 
-        x=top_5_per_city['count'],
+        top_5_per_city,
+        y=var3, 
+        x='count',
         orientation='h',
-        color=top_5_per_city['City'],
-        text=top_5_per_city['count'],
+        color='City',
+        text=f"count",
         color_discrete_sequence=color_seq)
 
     # Update the layout of the bar chart
-    fig.update_layout(title_text=f'Top 5 {var3} Counts Across Cities',
+    fig.update_layout(title_text=f'Most Common Types {var3} in Selected Cities',
                       xaxis_title='Count',
                       yaxis_title=f'{var3}',
                       barmode='group')
+    fig.update_traces(textposition='outside')
+
     return fig
 
 # Update map graph
