@@ -130,7 +130,7 @@ def update_bar_chart(province, cities, var3):
                                  .groupby('City')
                                  .head(5))
 
-    color_seq = ['#98BDFF', '#F3797E', '#8B1FB6', '#1FB69F' , '#601FB6',  '#D0116D']
+    color_seq = ['#98BDFF', '#F3797E', '#8B1FB6', '#1FB69F' , '#D0116D', '#601FB6']
 
     fig = px.bar(
         top_5_per_city,
