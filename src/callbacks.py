@@ -20,7 +20,7 @@ def update_city_dropdown(selected_province):
     
     # Pre-select Vancouver if British Columbia is selected
     if unique_cities:
-        city_value = unique_cities[0]
+        city_value = [unique_cities[0], unique_cities[1]]
     else:
         city_value = []  # No cities are pre-selected if not British Columbia
 
