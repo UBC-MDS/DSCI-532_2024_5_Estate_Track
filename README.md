@@ -6,16 +6,28 @@ First and foremost, welcome! 🎉 Willkommen! 🎊 Bienvenue! 🎈
 
 Thank you for visiting the `HomeScope` project repository. This README file is a hub that provides essential information about our project. Feel free to jump straight to one of the sections below, or simply scroll down to learn more.
 
--   [Who are we?](#who-are-we)
--   [What are we doing?](#what-are-we-doing)
--   [Get Support](#get-support)
--   [Collaboration](#collaboration)
--   [Join Our Journey](#join-our-journey)
--   [Data Sources and Licensing](#data-sources-and-licensing)
--   [Setup for Local Development](#setup-for-local-development)
--   [Contributing](#contributing)
--   [Thank You](#thank-you)
--   [Understand the jargon](#glossary)
+- [DSCI-532\_2024\_5\_HomeScope](#dsci-532_2024_5_homescope)
+  - [Welcome!](#welcome)
+  - [Who Are We?](#who-are-we)
+    - [Project Summary](#project-summary)
+    - [Motivation and Purpose](#motivation-and-purpose)
+    - [The Challenge](#the-challenge)
+    - [Dashboard Features](#dashboard-features)
+    - [The Solution](#the-solution)
+  - [What Are We Doing?](#what-are-we-doing)
+    - [The Dashboard](#the-dashboard)
+    - [Dashboard Design (Milestone3)](#dashboard-design-milestone3)
+    - [Forward Vision](#forward-vision)
+  - [Get Support](#get-support)
+  - [Collaboration](#collaboration)
+  - [Join Our Journey](#join-our-journey)
+    - [Data Sources and Licensing](#data-sources-and-licensing)
+      - [Data Sources](#data-sources)
+      - [Licensing](#licensing)
+  - [Setup for Local Development](#setup-for-local-development)
+  - [Contribution](#contribution)
+  - [Thank You](#thank-you)
+  - [Glossary](#glossary)
 
 <img src="img/Homescope_img.png" width="500"/>
 
@@ -145,7 +157,7 @@ To run `HomeScope` locally:
 
 This will launch the application, typically at <http://127.0.0.1:8050/> in your web browser.
 
-## Contributin
+## Contribution
 
 Your contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**. Please read our [Contribution Guidelines](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests to us.
 
