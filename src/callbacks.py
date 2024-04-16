@@ -264,8 +264,7 @@ def update_histogram_and_price_cards(province, cities):
 
     # Update layout
     fig.update_layout(
-        xaxis_title_text='Price',  
-        yaxis_title_text='Relative Frequency / Density',  
+        xaxis_title_text='Price',    
         legend_title_text='City',
         barmode='overlay',
         showlegend=True 
