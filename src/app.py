@@ -1,6 +1,6 @@
 from dash import Dash
 import dash_bootstrap_components as dbc
-from components import sidebar, card_avg_price, card_min_price, card_max_price,output_histogram, bar_plot_card_1, bar_plot_card_2, map_plot
+from components import sidebar, card_avg_price, card_avg_pop, card_avg_income,output_histogram, bar_plot_card_1, bar_plot_card_2, map_plot
 import callbacks
 
 # Initialize the Dash app with Bootstrap CSS
@@ -24,8 +24,8 @@ app.layout = dbc.Container(fluid=True, children=[
             # Row for Cards
             dbc.Row([
                 dbc.Col(card_avg_price, md=4),
-                dbc.Col(card_min_price, md=4),
-                dbc.Col(card_max_price, md=4)
+                dbc.Col(card_avg_pop , md=4),
+                dbc.Col(card_avg_income, md=4)
             ], className="mb-3"), 
             
             # Row for Bar Graph and Histogram

@@ -38,19 +38,8 @@ variable3_dropdown = dcc.Dropdown(
     )
 
 # Card for displaying the minimum price dynamically
-card_min_price = dbc.Card(
-    id='card-min-price', 
-    children=[
-        dbc.CardBody([
-            html.P("Select a province to see the minimum price", className="card-text")
-        ])
-    ],
-    className="card-min-price"  
-)
-
-# Card for displaying the average price dynamically
 card_avg_price = dbc.Card(
-    id='card-avg-price',
+    id='card-avg-price', 
     children=[
         dbc.CardBody([
             html.P("Select a province to see the average price", className="card-text")
@@ -59,15 +48,26 @@ card_avg_price = dbc.Card(
     className="card-avg-price"  
 )
 
-# Card for displaying the maximum price dynamically
-card_max_price = dbc.Card(
-    id='card-max-price', 
+# Card for displaying the average price dynamically
+card_avg_pop = dbc.Card(
+    id='card-avg-pop',
     children=[
         dbc.CardBody([
-            html.P("Select a province to see the maximum price", className="card-text")
+            html.P("Select a province to see the average population", className="card-text")
         ])
     ],
-    className="card-max-price"  
+    className="card-avg-pop"  
+)
+
+# Card for displaying the maximum price dynamically
+card_avg_income = dbc.Card(
+    id='card-avg-income', 
+    children=[
+        dbc.CardBody([
+            html.P("Select a province to see the median income", className="card-text")
+        ])
+    ],
+    className="card-avg-income"  
 )
 
 #bar plot of numeric column
