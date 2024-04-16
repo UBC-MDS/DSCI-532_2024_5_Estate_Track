@@ -157,50 +157,65 @@ def update_bar_chart(province, cities, var3):
      Input('city-dropdown', 'value')]
 )
 
-def update_map(province, cities):
-    # Selecting the province and setting up latitude and longitudes
-
+def update_map(province, selected_cities):
+    # Selecting the province
     province_df = df[df['Province'] == province]
-    first_city = province_df['City'].dropna().sort_values().iloc[0]
 
-    # Get the latitude and longitude of the first city
-    first_city_data = province_df[province_df['City'] == first_city]
-    avg_lat = first_city_data['Latitude'].iloc[0]
-    avg_lon = first_city_data['Longitude'].iloc[0]
+    # Ensure selected_cities is always a list
+    if not isinstance(selected_cities, list):
+        selected_cities = [selected_cities]
 
-    # Calculate the average price for each city within the selected province
+    # Filter only selected cities within the province
+    province_df = province_df[province_df['City'].isin(selected_cities)]
+
+    # If no city is selected, return an empty map with a message
+    if province_df.empty:
+        fig = go.Figure()
+        fig.update_layout(title="No data available for the selected city/cities.")
+        return fig
+
+    # Get the latitude and longitude for centering the map
+    center_lat = province_df['Latitude'].mean()
+    center_lon = province_df['Longitude'].mean()
+
+    # Calculate the average price for each selected city within the province
     city_avg_prices = province_df.groupby('City').agg({'Price': 'mean'}).reset_index()
 
     # Merge the average prices with the city locations
-    city_avg_prices = city_avg_prices.merge(province_df[['City', 'Latitude', 'Longitude','Median Family Income']].drop_duplicates(),
-                                            on='City', 
+    city_avg_prices = city_avg_prices.merge(province_df[['City', 'Latitude', 'Longitude', 'Median Family Income']].drop_duplicates(),
+                                            on='City',
                                             how='left')
-    city_avg_prices.rename(columns={'Price': 'Avg_Price', "Median Family Income":"Median_Income"}, inplace=True)
-    # Geospatial map for housing data
-    map_fig = px.scatter_mapbox(city_avg_prices, 
-                                lat="Latitude", 
-                                lon="Longitude", 
-                                color = "City" ,
-                                hover_data={"City": True, 
+
+    city_avg_prices.rename(columns={'Price': 'Avg_Price', "Median Family Income": "Median_Income"}, inplace=True)
+
+    map_fig = px.scatter_mapbox(city_avg_prices,
+                                lat="Latitude",
+                                lon="Longitude",
+                                color="City",
+                                hover_data={"City": True,
+                                            "Avg_Price": ':.2f',
                                             "Latitude": False,
-                                            "Longitude":False,
-                                            "Avg_Price":':.2f',
-                                            "Median_Income":True}, 
+                                            "Longitude": False,
+                                            "Median_Income": True},
                                 zoom=5,
-                                center={"lat": avg_lat, "lon": avg_lon},
+                                center={"lat": center_lat, "lon": center_lon},
                                 color_continuous_scale="RdYlGn_r")
+
+    # Manually update marker sizes to reflect selected status without including in hover
+    map_fig.update_traces(marker=dict(size=[9 if city in selected_cities else 2 for city in city_avg_prices['City']],
+                                      sizemode='diameter'))
+
     map_fig.update_layout(
-    mapbox_style="open-street-map",
-    margin={"r": 0, "t": 70, "l": 40, "b": 0},
-    title={
-         'text': f'Geospatial view of {province} House Prices',
-         'y':0.9,
-         'x':0.05,
-         'xanchor': 'left',
-         'yanchor': 'top'
-     },
-    barmode='group'
-)
+        mapbox_style="open-street-map",
+        margin={"r": 0, "t": 70, "l": 40, "b": 0},
+        title={
+            'text': f'Geospatial view of {province} House Prices',
+            'y': 0.9,
+            'x': 0.05,
+            'xanchor': 'left',
+            'yanchor': 'top'
+        }
+    )
     
     return map_fig
 
