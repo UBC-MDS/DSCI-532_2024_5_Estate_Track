@@ -33,7 +33,7 @@
     margin-bottom: 1rem; /* Space below the dropdown */
 }
 
-.card-min-price {
+.card-avg-price {
     margin-top: 20px;
     border-radius: 15px;
     color: white;
@@ -42,7 +42,7 @@
     margin-right: 10px;
 }
 
-.card-avg-price{
+.card-avg-pop{
     margin-top: 20px;
     border-radius: 15px;
     color: white;
@@ -50,7 +50,7 @@
     background-color: #7c7bd4; 
 }
 
-.card-max-price {
+.card-avg-income {
     margin-top: 20px;
     border-radius: 15px;
     color: white;
