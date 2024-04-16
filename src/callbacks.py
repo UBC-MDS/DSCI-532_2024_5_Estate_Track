@@ -235,7 +235,7 @@ def update_histogram_and_price_cards(province, cities):
     if isinstance(cities, str):
         cities = [cities]  # Ensure cities is a list
     filtered_df = filtered_df[filtered_df["City"].isin(cities)]
-
+    print(df)
     # Prepare the figure
     fig = go.Figure()
 
@@ -276,13 +276,13 @@ def update_histogram_and_price_cards(province, cities):
 
 
     # Calculate statistics for price cards
-    min_price = filtered_df["Price"].min() if not filtered_df.empty else "N/A"
-    avg_price = filtered_df["Price"].mean() if not filtered_df.empty else "N/A"
-    max_price = filtered_df["Price"].max() if not filtered_df.empty else "N/A"
+    pop_avg = int(filtered_df["Population"].mean()) if not filtered_df.empty else "N/A"
+    avg_price = int(filtered_df["Price"].mean()) if not filtered_df.empty else "N/A"
+    income_avg = int(filtered_df["Median Family Income"].mean()) if not filtered_df.empty else "N/A"
 
     # Update card contents
-    min_card_content = dbc.CardBody(f"Minimum Price: ${min_price:,.2f}", className="card-text")
-    avg_card_content = dbc.CardBody(f"Average Price: ${avg_price:,.2f}", className="card-text")
-    max_card_content = dbc.CardBody(f"Maximum Price: ${max_price:,.2f}", className="card-text")
+    pop_card_content = dbc.CardBody(f"Average Population in Selected Cities: ${pop_avg:,}", className="card-text")
+    price_card_content = dbc.CardBody(f"Average Price in Selected Cities: ${avg_price:,}", className="card-text")
+    income_card_content = dbc.CardBody(f"Average Income in Selected Cities: ${income_avg:,}", className="card-text")
 
-    return fig, avg_card_content, min_card_content, max_card_content
+    return fig, pop_card_content, price_card_content, income_card_content
