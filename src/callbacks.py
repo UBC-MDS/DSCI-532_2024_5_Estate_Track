@@ -235,7 +235,6 @@ def update_histogram_and_price_cards(province, cities):
     if isinstance(cities, str):
         cities = [cities]  # Ensure cities is a list
     filtered_df = filtered_df[filtered_df["City"].isin(cities)]
-    print(df)
     # Prepare the figure
     fig = go.Figure()
 
