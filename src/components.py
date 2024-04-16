@@ -34,7 +34,7 @@ variable3_dropdown = dcc.Dropdown(
         id='variable3-dropdown',
         options=[feature for feature in df[['Bedrooms', 'Bathrooms']]],
         value='Bedrooms',
-        style={'width': '88%', 'margin-left': '20px'}
+        style={'width': '83%', 'margin-left': '38px'}
     )
 
 # Card for displaying the minimum price dynamically
@@ -95,6 +95,7 @@ sidebar = dbc.Col([
         style={'margin-bottom': '0px', 'padding-bottom': '0px'}
     ),
     html.Br(),
+    html.Br(),
     html.H3('Global controls'),  # Heading for the sidebar
     html.Br(),
     html.H5('Select Province'),  # Title for the province dropdown
@@ -102,7 +103,12 @@ sidebar = dbc.Col([
     html.Br(),
     html.H5('Select City'),  # Title for the city dropdown
     city_dropdown,
-    html.Br() ,
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    html.Br(),
     html.Br(),
     html.Br(),
     html.Div([

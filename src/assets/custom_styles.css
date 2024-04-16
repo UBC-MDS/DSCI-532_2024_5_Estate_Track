@@ -12,8 +12,8 @@
 }
 
 .text-muted {
-    /* font-size: 18px; */ 
-    text-align: justify;
+    font-size: 18px;
+    text-align: justify; 
 }
 
 .sidebar-footer {
@@ -63,7 +63,7 @@
 }
 
 .card-text {
-    font-size: 28px; 
+    font-size: 22px; 
     border-style: none;
 }
 
