@@ -222,9 +222,9 @@ def update_map(province, selected_cities):
 @callback(
         [
             Output("output-histogram", "figure"), 
-            Output("card-min-price", "children"),
             Output("card-avg-price", "children"),
-            Output("card-max-price", "children"),
+            Output("card-avg-pop", "children"),
+            Output("card-avg-income", "children"),
         ],
         [Input("province-dropdown", "value"), Input("city-dropdown", "value")],
     )
