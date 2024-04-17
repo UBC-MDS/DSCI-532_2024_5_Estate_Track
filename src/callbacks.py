@@ -4,9 +4,10 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
-
-
+import joblib
 from data import df
+
+memory = joblib.Memory("tmp", verbose=0)
 
 # Callback to update city-dropdown options and values based on selected province
 @callback(
@@ -34,7 +35,10 @@ def update_city_dropdown(selected_province):
      Input('variable1-dropdown', 'value'),
      Input('variable2-dropdown', 'value')]
 )
+@memory.cache()
 def update_bar_chart(province, cities, var1, var2):
+    import time
+    time.sleep(2)
     # If no city is selected, return an empty figure with a message
     if not cities:
         return {
@@ -108,7 +112,10 @@ def update_bar_chart(province, cities, var1, var2):
      Input('city-dropdown', 'value'),
      Input('variable3-dropdown', 'value')]
 )
+@memory.cache()
 def update_bar_chart(province, cities, var3):
+    import time
+    time.sleep(2)
     # If no city is selected, return an empty figure with a message
     if not cities:
         return {
