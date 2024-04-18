@@ -18,3 +18,4 @@ zipp==3.17.*
 gunicorn==21.2.*
 dash-vega-components==0.10.*
 vega-datasets==0.9.*
+joblib==1.4.*
