@@ -1,7 +1,5 @@
 /* custom_styles.css */
 
-/* custom_styles.css */
-
 /* Style for the sidebar */
 .sidebar {
     margin-top: 20px;
@@ -20,6 +18,13 @@
     font-size: 20px;
 }
 
+.img-logo {
+    width: 60%;  
+    height: auto;  
+    margin-left: 20%;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
 
 /* Style for the titles above the dropdowns */
 .dropdown-title {
@@ -39,7 +44,7 @@
     color: white;
     padding: 20px;
     background-color: #9896df; 
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .card-avg-pop{
@@ -47,7 +52,8 @@
     border-radius: 15px;
     color: white;
     padding: 20px;
-    background-color: #7c7bd4; 
+    background-color: #7c7bd4;
+    margin-right: 5px; 
 }
 
 .card-avg-income {
@@ -56,6 +62,7 @@
     color: white;
     padding: 20px;
     background-color: #87a3eb; 
+    margin-right: 5px;
 }
 
 .card-number {
