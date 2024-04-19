@@ -1,5 +1,7 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
+from dash import dash_table
+import dash_daq as daq
 from data import df
 
 
@@ -85,39 +87,41 @@ bar_plot_card_1 = dbc.Card(
     style={"border": "none", "boxShadow": "none"}
 )
 
+# Expert mode toggle switch
+expert_toggle = daq.BooleanSwitch(
+    id='expert-toggle',
+    on=False,
+    label={'label': 'Expert Mode', 'style': {'color': 'white', 'font-weight': 'bold'}},
+    color='#72b7b2'
+)
+
 sidebar = dbc.Col([
-    html.Img(src='/assets/logos/logo_main.png', className='img-fluid'),
-    html.Br(),
-    html.Br(),
-    html.P(
-        "Welcome to HomeScope, the gateway to actionable insights in real estate. Dive deep into key data and empower your decisions with our comprehensive analysis tool.",  # Description text
-        className='text-muted',
-        style={'margin-bottom': '0px', 'padding-bottom': '0px'}
-    ),
-    html.Br(),
-    html.Br(),
-    html.H3('Global controls'),  # Heading for the sidebar
-    html.Br(),
-    html.H5('Select Province'),  # Title for the province dropdown
-    province_dropdown,
-    html.Br(),
-    html.H5('Select City'),  # Title for the city dropdown
-    city_dropdown,
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
-    html.Br(),
     html.Div([
-        html.P("Last Updated: 2024-04-15"),
+        html.Img(src='/assets/logos/logo_main.png', className='img-fluid'),
+        html.P(
+            "Welcome to HomeScope, the gateway to actionable insights in real estate. Dive deep into key data and empower your decisions with our comprehensive analysis tool.",
+            className='text-muted', style={'margin-bottom': '0px', 'padding-bottom': '0px'}
+        ),
+        html.Br(),
+        html.Br(),
+        html.H3('Global controls'),
+        html.Br(),
+        html.H5('Select Province'),
+        province_dropdown,
+        html.Br(),
+        html.H5('Select City'),
+        city_dropdown,
+        html.Br(),
+        html.Br(),
+        expert_toggle,
+    ], style={'flex': '1'}),  # This makes the div grow to take available space, pushing the footer down
+    
+    html.Div([
+        html.P("Last Updated: 2024-04-20"),
         html.P("Made by: @Iris, @Aishwarya, @Carrie,  @Nasim"),
         html.P(html.A("Repo: HomeScope", href="https://github.com/UBC-MDS/DSCI-532_2024_5_HomeScope")),
     ], className="sidebar-footer"),
- 
-], className="sidebar")
+], style={'display': 'flex', 'flex-direction': 'column', 'height': '100vh'}, className="sidebar")
 
 
 #histogram plot of price
@@ -138,3 +142,14 @@ bar_plot_card_2 = dbc.Card([
 ],
 style={"border": "none", "boxShadow": "none"} 
 )
+
+#a table to show data in detail
+def create_table(df):
+    return dash_table.DataTable(
+        id='table',
+        data=df.to_dict('records'),
+        columns=[{"name": col.replace('_', ' '), "id": col} for col in df.columns],
+        page_size=10,
+        sort_action='native',
+        filter_action='native'
+    )

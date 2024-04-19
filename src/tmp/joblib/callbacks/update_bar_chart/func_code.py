@@ -1,13 +1,12 @@
-# first line: 31
+# first line: 110
 @callback(
-    Output('bar-graph-1', 'figure'),
+    Output('bar-graph-2', 'figure'),
     [Input('province-dropdown', 'value'),
      Input('city-dropdown', 'value'),
-     Input('variable1-dropdown', 'value'),
-     Input('variable2-dropdown', 'value')]
+     Input('variable3-dropdown', 'value')]
 )
 @memory.cache()
-def update_bar_chart(province, cities, var1, var2):
+def update_bar_chart(province, cities, var3):
     import time
     time.sleep(2)
     # If no city is selected, return an empty figure with a message
@@ -26,52 +25,27 @@ def update_bar_chart(province, cities, var1, var2):
     df_filtered = df[(df['Province'] == province) & (df['City'].isin(cities))]
 
     # Group the data by City and calculate the mean of the selected variables
-    df_grouped = df_filtered.groupby('City')[[var1,var2]].mean()
-    df_grouped_samevar = df_filtered.groupby('City').agg({var1: 'mean'})
+    df_count = df_filtered.groupby('City')[[var3]].value_counts().reset_index()
+    top_5_per_city = (df_count.sort_values(['City', 'count'], ascending=[True, False])
+                                 .groupby('City')
+                                 .head(5))
 
-    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    color_seq = ['#98BDFF', '#F3797E', '#8B1FB6', '#1FB69F' , '#D0116D', '#601FB6']
 
-    if var1 == var2:
-        # If the two variables are the same, plot only one set of bars
-        fig.add_trace(go.Bar(
-            x=df_grouped_samevar.index,
-            y=df_grouped_samevar[var1],
-            text=df_grouped_samevar[var1],                # Add the income values as text
-            textposition='auto',              # Position the text automatically
-            texttemplate='%{text:.2s}',
-            name=f'{var1}',
-            marker_color='#F3797E'))
-    else:
-        # If the two variables are different, plot two sets of bars
-        fig.add_trace(go.Bar(
-            x=df_grouped.index,
-            y=df_grouped[var1],
-            text=df_grouped[var1],                # Add the income values as text
-            textposition='auto',              # Position the text automatically
-            texttemplate='%{text:.2s}',
-            name=f'{var1}',
-            marker_color='#F3797E',
-            offsetgroup=1),
-            secondary_y=False
-        )
-    
-        # Add bar 2 for var 2
-        fig.add_trace(go.Bar(
-            x=df_grouped.index,
-            y=df_grouped[var2],
-            text=df_grouped[var2],  
-            textposition='auto',             
-            texttemplate='%{text:.2s}',
-            name=f'{var2}',
-            marker_color='#7978E9',
-            offsetgroup=2),
-            secondary_y=True,
-        )
+    fig = px.bar(
+        top_5_per_city,
+        y=var3, 
+        x='count',
+        orientation='h',
+        color='City',
+        text=f"count",
+        color_discrete_sequence=color_seq)
 
     # Update the layout of the bar chart
-    fig.update_layout(title_text=f'Comparison of {var1} and {var2}',
-                     barmode='group')
-    fig.update_yaxes(title_text=f'{var1}', secondary_y=False)
-    fig.update_yaxes(title_text=f'{var2}', secondary_y=True)
+    fig.update_layout(title_text=f'Most Common Types {var3} in Selected Cities',
+                      xaxis_title='Count',
+                      yaxis_title=f'{var3}',
+                      barmode='group')
+    fig.update_traces(textposition='outside')
 
     return fig
