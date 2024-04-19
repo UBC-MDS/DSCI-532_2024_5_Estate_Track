@@ -1,4 +1,4 @@
-from dash import Input, Output,callback
+from dash import Input, Output,callback, dcc, html, State
 import dash_bootstrap_components as dbc
 import plotly.express as px
 import plotly.graph_objects as go
@@ -299,5 +299,28 @@ def update_histogram_and_price_cards(province, cities):
 )
 def toggle_table(toggle_on):
     if toggle_on:
-        return create_table(df)
+        price_range_slider = dcc.RangeSlider(
+            id='price-range-slider',
+            min=int(df['Price'].min()),
+            max=int(df['Price'].max()),
+            step=1000000,
+            value=[int(df['Price'].min()), int(df['Price'].max())],
+            updatemode='drag'
+        )
+        table = create_table(df)
+        # Return both the slider and table as children of the container Div
+        return html.Div([price_range_slider, table])
     return None
+
+@callback(
+    Output('table', 'data'),
+    [Input('price-range-slider', 'value')],
+    State('table', 'data')  # Use State to keep the current table data intact unless the slider is adjusted
+)
+def update_table(price_range, existing_data):
+    if price_range is None:
+        # If the price range is not set, don't filter the data
+        return existing_data
+    # Filter the DataFrame based on the slider range
+    filtered_df = df[(df['Price'] >= price_range[0]) & (df['Price'] <= price_range[1])]
+    return filtered_df.to_dict('records')

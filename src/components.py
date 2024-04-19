@@ -151,5 +151,5 @@ def create_table(df):
         columns=[{"name": col.replace('_', ' '), "id": col} for col in df.columns],
         page_size=10,
         sort_action='native',
-        filter_action='native',
+        filter_action='native'
     )
