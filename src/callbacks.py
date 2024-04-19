@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from components import create_table
 import numpy as np
 import joblib
 from data import df
@@ -291,3 +292,12 @@ def update_histogram_and_price_cards(province, cities):
     income_card_content = dbc.CardBody(f"Average Income in Selected Cities: ${income_avg:,}", className="card-text")
 
     return fig, pop_card_content, price_card_content, income_card_content
+
+@callback(
+    Output('table-container', 'children'),
+    Input('expert-toggle', 'on')
+)
+def toggle_table(toggle_on):
+    if toggle_on:
+        return create_table(df)
+    return None

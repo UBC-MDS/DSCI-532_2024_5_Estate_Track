@@ -1,4 +1,4 @@
-# first line: 31
+# first line: 32
 @callback(
     Output('bar-graph-1', 'figure'),
     [Input('province-dropdown', 'value'),
