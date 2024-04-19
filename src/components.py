@@ -97,7 +97,7 @@ expert_toggle = daq.BooleanSwitch(
 
 sidebar = dbc.Col([
     html.Div([
-        html.Img(src='/assets/logos/logo_main.png', className='img-fluid'),
+        html.Img(src='/assets/logos/logo_main.png', className='img-logo'),
         html.P(
             "Welcome to HomeScope, the gateway to actionable insights in real estate. Dive deep into key data and empower your decisions with our comprehensive analysis tool.",
             className='text-muted', style={'margin-bottom': '0px', 'padding-bottom': '0px'}

@@ -1,7 +1,5 @@
 /* custom_styles.css */
 
-/* custom_styles.css */
-
 /* Style for the sidebar */
 .sidebar {
     margin-top: 20px;
@@ -20,6 +18,13 @@
     font-size: 20px;
 }
 
+.img-logo {
+    width: 60%;  
+    height: auto;  
+    margin-left: 20%;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
 
 /* Style for the titles above the dropdowns */
 .dropdown-title {
