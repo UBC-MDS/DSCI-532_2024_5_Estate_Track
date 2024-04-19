@@ -287,7 +287,7 @@ def update_histogram_and_price_cards(province, cities):
     income_avg = int(filtered_df["Median Family Income"].mean()) if not filtered_df.empty else "N/A"
 
     # Update card contents
-    pop_card_content = dbc.CardBody(f"Average Population in Selected Cities: ${pop_avg:,}", className="card-text")
+    pop_card_content = dbc.CardBody(f"Average Population in Selected Cities: {pop_avg:,}", className="card-text")
     price_card_content = dbc.CardBody(f"Average Price in Selected Cities: ${avg_price:,}", className="card-text")
     income_card_content = dbc.CardBody(f"Average Income in Selected Cities: ${income_avg:,}", className="card-text")
 
