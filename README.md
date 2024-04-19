@@ -66,9 +66,9 @@ Our `HomeScope` dashboard is an empowering tool that enables:
 The current iteration of `HomeScope` boasts:
 
 -   Interactive filters for localized real estate data analysis.
--   Correlative scatter plots elucidating the influence of property features on pricing.
+-   Correlative bar plots that elucidate the influence of property features on pricing.
 -   An interactive map to visualize geographical data and price distributions.
--   Comparative visualizations that convey a thorough market overview.
+-   A table with an implemented price range slider for interactive filtering.
 
 ### Forward Vision
 
