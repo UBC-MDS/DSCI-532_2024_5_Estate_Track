@@ -14,7 +14,8 @@ dependencies:
     - r-languageserver
     - r-plotly
     - pip
-    - pandas=2.2.*  
+    - pandas=2.2.* 
+    - pyarrow
     - pip:
         - dash-daq==0.5.* 
         - dash-vega-components==0.10.*
