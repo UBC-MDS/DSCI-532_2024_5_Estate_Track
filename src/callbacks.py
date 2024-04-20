@@ -299,18 +299,22 @@ def update_histogram_and_price_cards(province, cities):
 )
 def toggle_table(toggle_on):
     if toggle_on:
-        price_range_slider = dcc.RangeSlider(
-            id='price-range-slider',
-            min=int(df['Price'].min()),
-            max=int(df['Price'].max()),
-            step=1000000,
-            value=[int(df['Price'].min()), int(df['Price'].max())],
-            updatemode='drag'
-        )
+        price_range_slider = html.Div([
+            html.Label('Adjust Price Range of Table:'),
+            dcc.RangeSlider(
+                id='price-range-slider',
+                min=int(df['Price'].min()),
+                max=int(df['Price'].max()),
+                step=1000000,
+                value=[int(df['Price'].min()), int(df['Price'].max())],
+                updatemode='drag'
+            )
+        ])
         table = create_table(df)
         # Return both the slider and table as children of the container Div
         return html.Div([price_range_slider, table])
     return None
+
 
 @callback(
     Output('table', 'data'),
