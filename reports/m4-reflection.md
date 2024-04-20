@@ -6,7 +6,7 @@ The insights gained from these discussions directly influenced several key decis
 Feedback from other students was also helpful for some touchups and additional modifications to our dashboard.
 
 ## Comment on anything that can better support you developing a high quality dashboard
-
+More guidance and information on deployment could help us avoid some chanllenges.
 
 ## Any difference from milestone 3
 Compared to Milestone 3, we have updated our dashboard in several key areas: widget functionality, layout aesthetics, code efficiency, and written content. We preset two default cities for each province to allow for comparative analysis, thus enhancing the graphs' interpretability. We replaced the original cards that displayed minimum and maximum prices with new metrics: Average Population and Average Income, providing an overview of the demographic and financial context of the selected cities. Additionally, we harmonized the color theme of the bar plots with the overall dashboard theme and revised the positioning and wording of the text for clearer understanding. We updated the interactive map to display only selected cities for greater specificity. The dataset is now read using a binary data storage format to improve performance, and we implemented caching within the app to remember previously outputted results.
