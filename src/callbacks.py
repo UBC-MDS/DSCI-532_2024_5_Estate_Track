@@ -321,6 +321,7 @@ def toggle_table(toggle_on):
     [Input('price-range-slider', 'value')],
     State('table', 'data')  # Use State to keep the current table data intact unless the slider is adjusted
 )
+
 def update_table(price_range, existing_data):
     if price_range is None:
         # If the price range is not set, don't filter the data
