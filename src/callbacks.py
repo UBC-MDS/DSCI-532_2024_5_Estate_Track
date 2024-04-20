@@ -321,10 +321,8 @@ def toggle_table(toggle_on):
     [Input('price-range-slider', 'value')],
     State('table', 'data')  # Use State to keep the current table data intact unless the slider is adjusted
 )
-@memory.cache()
+
 def update_table(price_range, existing_data):
-    import time
-    time.sleep(1)
     if price_range is None:
         # If the price range is not set, don't filter the data
         return existing_data
