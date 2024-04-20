@@ -38,8 +38,6 @@ def update_city_dropdown(selected_province):
 )
 @memory.cache()
 def update_bar_chart(province, cities, var1, var2):
-    import time
-    time.sleep(2)
     # If no city is selected, return an empty figure with a message
     if not cities:
         return {
@@ -115,8 +113,6 @@ def update_bar_chart(province, cities, var1, var2):
 )
 @memory.cache()
 def update_bar_chart(province, cities, var3):
-    import time
-    time.sleep(2)
     # If no city is selected, return an empty figure with a message
     if not cities:
         return {
