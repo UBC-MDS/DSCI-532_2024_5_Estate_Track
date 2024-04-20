@@ -1,7 +1,9 @@
 # HomeScope Reflection
 
 ## Brief reflection on insight, material, feedback
-
+During the development of our project dashboard, the one-on-one discussions with our professor proved immensely valuable. These sessions provided tailored feedback specific to our project's needs and challenges.
+The insights gained from these discussions directly influenced several key decisions in our dashboard development. For instance, based on the professor's feedback, we designed the components of our data presentation to ensure that users could understand the key metrics. We also ensured that our layout communicated our dashboard's main purpose effectively. In addition, we could omit repetitions and highlight the important data more clearly. We also introduced interactive elements that allowed users to explore different data segments, which made the dashboard more engaging and informative.
+Feedback from other students was also helpful for some touchups and additional modifications to our dashboard.
 
 ## Comment on anything that can better support you developing a high quality dashboard
 
